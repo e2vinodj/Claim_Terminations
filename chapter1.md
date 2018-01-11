@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 53fa07b6f2
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: d0d6d980f1
+key: 
 xp: 25
 ```
 
@@ -101,7 +101,7 @@ xp: 25
 `@instructions`
 A R package typically includes several functions and sometimes even data sets within it. Some packages are included with the Base R version.  There are several other R packages developed by the community that can be reused by you to perform simple to complex tasks without having to reinvent the wheel. These packages must be downloaded and installed  from CRAN-like repositories or from local files. You can use the function `install.packages("package name in quotes")` to install packages in your system. This is often an onetime task.
 
-To use a function or data from the other packages, we must load the package into the session before calling the function. To load a package use the function 'library(package name without quotes)`. 
+To use a function or data from the other packages, we must load the package into the session before calling the function. To load a package use the function  `library(package name without quotes)`. 
 
 To unload a package from the memory, use the function `detach()`.
 
@@ -113,7 +113,7 @@ Type the `?` in front of the function names like `?library()` in the R console t
 ```yaml
 type: NormalExercise
 lang: r
-key: 97e4252372
+key: 
 xp: 50
 ```
 
@@ -165,14 +165,12 @@ detach(package:stringr)
 
 `@sct`
 ```{r}
-test_function("library", args = "stringr",
+test_function("library", args = "obj1",
               not_called_msg = "Have you used the function to load the stringr package?",
-              args_not_specified = "Have you specified the package name in the function?",
               incorrect_msg = "Have you provided the correct package name to load stringr?")
 
-test_function("detach", args = "stringr",
+test_function("detach", args = "obj2",
               not_called_msg = "Have you used the function to unload the stringr package?",
-              args_not_specified = "Have you specified the package name in the function?",
               incorrect_msg = "Have you provided the correct package name to unload stringr?")
               
 test_error()
