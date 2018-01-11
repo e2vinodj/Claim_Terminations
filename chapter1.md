@@ -101,8 +101,6 @@ test_function("names", args = "ctr_data",
                                "Have you specified the correct table name?"))
               
 
-test_function("names", not_called_msg = "You didn't call `head()`!")
-
 test_error()
 success_msg("Good work!")
 
