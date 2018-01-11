@@ -1182,7 +1182,7 @@ unlink(temp)
 #1 sets the random seed with the argument  4567
 set.seed(4567)
 
-#2 Populate a list with 100 uniform random numbers between 0 & 1
+#2 Populate a list with 100 uniform random numbers between 10 & 15
 My_List <- runif(  ,  , )
 
 #3 Print the values in the list
@@ -1199,8 +1199,8 @@ Use `runif(n, min = , max = )` function to generate n uniform random numbers.
 #1 sets the random seed with the argument  4567
 set.seed(4567)
 
-#2 Populate a list with 100 uniform random numbers between 0 & 1
-My_List <- runif(100,0,1)
+#2 Populate a list with 100 uniform random numbers between 10 & 15
+My_List <- runif(100,10,15)
 
 #3 Print the values in the list
 My_List
@@ -1211,9 +1211,9 @@ My_List
 `@sct`
 ```{r}
 
-#2 Populate a list with 100 uniform random numbers between 0 & 1
+#2 Populate a list with 100 uniform random numbers between 10 & 15
 test_function("runif", args = c("n","mi","mx"),
-              not_called_msg = "Have you used `runif()` to generate the uniform random numbers?",
+              not_called_msg = "Have you used runif() to generate the uniform random numbers?",
               args_not_specified = c("Have you specified the total number of random numbers?",
                                      "Have you specified the lower limit of the random number?",
                                      "Have you specified the upper limit of the random number?"),
