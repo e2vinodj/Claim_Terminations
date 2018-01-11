@@ -841,14 +841,14 @@ filter(ctr_data, Gender == "Female",  IncurredAgeBucket == "80 to 84", Max_Ben_B
 
 `@sct`
 ```{r}
-test_function("filter", args = c("ctr_data", "ClaimType = "HHC" | ClaimType = "ALF"),
+test_function("filter", args = c('ctr_data', 'ClaimType = "HHC" | ClaimType = "ALF"'),
               index=1,
               not_called_msg = "Have you used the function to select the records?",
               args_not_specified = "Have you specified the condition correctly to select the records",
               incorrect_msg = c("Have you used the function to select the records? ",
                                "Have you specified the condition to select the records"))
 
-test_function("filter", args = c("ctr_data", "Gender == ""Female""","IncurredAgeBucket == ""80 to 84""","Max_Ben_Bucket != ""Unlimited"""),
+test_function("filter", args = c('ctr_data', 'Gender == "Female','IncurredAgeBucket == "80 to 84"','Max_Ben_Bucket != "Unlimited"'),
               index=2,
               not_called_msg = "Have you used the function to select the records?",
               args_not_specified = "Have you specified the condition correctly to select the records",
@@ -959,7 +959,7 @@ mutate(ctr_data, BP_Type  = if_else(Max_Ben_Bucket == "Unlimited",  "Lifetime", 
 
 `@sct`
 ```{r}
-test_function("mutate", args = c("ctr_data", "BP_Type  = if_else(Max_Ben_Bucket == ""Unlimited""",  ""Lifetime"",  """Non-Life""" )"),
+test_function("mutate", args = c('ctr_data', 'BP_Type  = if_else(Max_Ben_Bucket == "Unlimited",  "Lifetime",  "Non-Life" )'),
               index=3,
               not_called_msg = "Have you used the function to modify the records?",
               args_not_specified = "Have you specified the correct expression to create the new variable BP_TYPE",
@@ -1414,7 +1414,7 @@ test_function("levels", args = "ClaimType.f", index=4,
                                "Have you specified the correct varaible name in the argument?"))
 							   
 #11 Change the base level of variable `ClaimType.f` to "NF"
-test_function("relevel", args = c("ClaimType.f","""NF"""), index=2,
+test_function("relevel", args = c('ClaimType.f','"NF"'), index=2,
               not_called_msg = "Have you used `relevel()` to change the levels in a factor variable?",
               args_not_specified = "Have you specified the correct variable name and the base level value?",
               incorrect_msg = c("Have you used `relevel()` to change the levels in a factor variable?",
