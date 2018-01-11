@@ -10,8 +10,7 @@ type: NormalExercise
 lang: r
 xp: 50
 skills: 1
-key: 
-
+key: e15e1c6c6c
 ```
 In the next few exercises, we will explore the data file that will be used at the the workshop. Claim termination rate (CTR) data has been extracted from the SOA experience database and modified for workshop purposes.The modified data is downloaded here as a R Data table and is named 'ctr_data'.
 
