@@ -272,21 +272,21 @@ names(ctr_data)
 
 #1 View the basic structure of the claim termination data table 'ctr_data'
 test_function("str", args = "ctr_data",
-              not_called_msg = "Have you used `str()` to see the structure of the ctr_data table?",
+              not_called_msg = "Have you used str() to see the structure of the ctr_data table?",
               args_not_specified = "Have you specified the table name?",
-              incorrect_msg = c("Have you specified the correct table name?"))
+              incorrect_msg = "Have you specified the correct table name?")
               
 #2 View the top rows from the claim termination data table 'ctr_data'
 test_function("head", args = "ctr_data",
-              not_called_msg = "Have you used `head()` to see the top records from the ctr_data table?",
+              not_called_msg = "Have you used head() to see the top records from the ctr_data table?",
               args_not_specified = "Have you specified the table name?",
-              incorrect_msg = c("Have you specified the correct table name?"))
+              incorrect_msg = "Have you specified the correct table name?")
               
 #3 View the column names in the claim termination data table 'ctr_data'
 test_function("names", args = "ctr_data",
-              not_called_msg = "Have you used `names()` to see the variable names in the ctr_data table?",
+              not_called_msg = "Have you used names() to see the variable names in the ctr_data table?",
               args_not_specified = "Have you specified the table name?",
-              incorrect_msg = c("Have you specified the correct table name?"))
+              incorrect_msg = "Have you specified the correct table name?")
               
 
 test_error()
@@ -686,7 +686,7 @@ library(dplyr)
 test_function("library", args = "dplyr",
               not_called_msg = "Have you used the function to load the `dplyr` package?",
               args_not_specified = "Have you specified the package name - dplyr?",
-              incorrect_msg = c("Have you specified the correct package name?"))
+              incorrect_msg = "Have you specified the correct package name?")
 
 
 test_error()
@@ -762,7 +762,12 @@ new_ctr_data <- select(ctr_data, TQ_Status, Cov_Type_Bucket, Terminations)
 test_function("select", args = c("ctr_data", "fake_claim_id", "Gender", "Claim_Type", "Max_Ben_Bucket"),
               index=1,
               not_called_msg = "Have you used the function to select the columns?",
-              args_not_specified = "Have you specified, all the 4 column names as in the table?",
+              args_not_specified = c("Have you specified the table name correctly in the function?",
+                                "Have you specified the column 'fake_claim_id'?",
+                                "Have you specified the column 'Gender'?",
+                                "Have you specified the column 'Claim_Type'?",
+                                "Have you specified the column 'Max_Ben_Bucket'?"
+                                 ),
               incorrect_msg = c("Have you specified the table name correctly in the function?",
                                 "Have you specified the column 'fake_claim_id'?",
                                 "Have you specified the column 'Gender'?",
@@ -774,7 +779,9 @@ test_function("select", args = c("ctr_data", "fake_claim_id", "Gender", "Claim_T
 test_function("select", args = c("temp_ctr_data", "-fake_claim_id"),
               index=2,
               not_called_msg = "Have you used the function to select the columns?",
-              args_not_specified = "Have you specified the column names to keep/remove and are they named as in the table?",
+              args_not_specified = c("Have you specified the table name correctly in the function?",
+                                     "Have you specified the column 'fake_claim_id' to remove?"
+                                   ),
               incorrect_msg = c("Have you specified the table name correctly in the function?",
                                 "Have you specified the column 'fake_claim_id' to remove?"
                                ))
@@ -782,7 +789,11 @@ test_function("select", args = c("temp_ctr_data", "-fake_claim_id"),
 test_function("select", args = c("ctr_data", "TQ_Status", "Cov_Type_Bucket", "Terminations"),
               index=3,
               not_called_msg = "Have you used the function to select the columns?",
-              args_not_specified = "Have you specified, all the 3 column names as in the table?",
+              args_not_specified = c("Have you specified the table name correctly in the function?",
+                                "Have you specified the column 'TQ_Status'?",
+                                "Have you specified the column 'Cov_Type_Bucket'?",
+                                "Have you specified the column 'Terminations'?"
+                                 ),
               incorrect_msg = c("Have you specified the table name correctly in the function?",
                                 "Have you specified the column 'TQ_Status'?",
                                 "Have you specified the column 'Cov_Type_Bucket'?",
@@ -842,13 +853,11 @@ filter(ctr_data, Gender == "Female",  IncurredAgeBucket == "80 to 84", Max_Ben_B
 ```{r}
 test_function("filter", args = c('ctr_data', "..."),
               index=1,
-              not_called_msg = "Have you used the function to select the records?",
-              args_not_specified = "Have you specified the table and conditions correctly to select the records")
+              not_called_msg = "Have you used the function to select the records?")
 
 test_function("filter", args = c('ctr_data', "..."),
               index=2,
-              not_called_msg = "Have you used the function to select the records?",
-              args_not_specified = "Have you specified the table and conditions correctly to select the records")
+              not_called_msg = "Have you used the function to select the records?")
 
 test_error()
 success_msg("Good work!")
@@ -967,8 +976,7 @@ test_function("mutate",
               not_called_msg = "Have you used the mutate function to modify the records?")
 
 
-test_output_contains("ctr_data[1:50,]$BP_Type",
-                     times = 1)
+test_output_contains("ctr_data[1:50,]$BP_Type", times = 1)
 test_error()
 success_msg("Good work!")
 ```
@@ -1015,10 +1023,10 @@ head(ctr_data_temp1(50))
 head(ctr_data_temp2(50))
 
 #5 See the basic structure of 'ctr_data_temp1' table
-str(ctr_data_temp1(50))
+str(ctr_data_temp1)
 
 #5 See the basic structure of 'ctr_data_temp2' table
-str(ctr_data_temp2(50))
+str(ctr_data_temp2)
 
 ```
 
@@ -1041,10 +1049,10 @@ head(ctr_data_temp1(50))
 head(ctr_data_temp2(50))
 
 #5 See the basic structure of 'ctr_data_temp1' table
-str(ctr_data_temp1(50))
+str(ctr_data_temp1)
 
 #5 See the basic structure of 'ctr_data_temp2' table
-str(ctr_data_temp2(50))
+str(ctr_data_temp2)
 
 ```
 
@@ -1117,7 +1125,8 @@ ctr_data %>%
 test_function("group_by", args = c("Gender", "IncurredAgeBucket"),
               index=2,
               not_called_msg = "Have you used the function to Group the records?",
-              args_not_specified = "Have you specified the columns to group by? ",
+              args_not_specified =  c("Have you specified Gender to group by?",
+                               "Have you specified the IncurredAgeBucket to group by? "),
               incorrect_msg = c("Have you specified Gender to group by?",
                                "Have you specified the IncurredAgeBucket to group by? "))
 
@@ -1205,7 +1214,9 @@ My_List
 #2 Populate a list with 100 uniform random numbers between 0 & 1
 test_function("runif", args = c("n","mi","mx"),
               not_called_msg = "Have you used `runif()` to generate the uniform random numbers?",
-              args_not_specified = "Have you specified the correct arguments?",
+              args_not_specified = c("Have you specified the total number of random numbers?",
+                                     "Have you specified the lower limit of the random number?",
+                                     "Have you specified the upper limit of the random number?"),
               incorrect_msg = c("Have you specified the total number of random numbers?",
                                 "Have you specified the lower limit of the random number?",
                                "Have you specified the upper limit of the random number?"))
@@ -1402,22 +1413,23 @@ relevel(ClaimType.f, "NF")
 `@sct`
 ```{r}
 
-#9 Make a new variable `ClaimType.f` as a factor and populate the value from `ClaimType` in ctr_data table. 
+#9 Make a new variable ClaimType.f as a factor and populate the value from ClaimType in ctr_data table. 
 # Do Not add `ClaimType.f` as a column in the table ctr_data. Order the factors in the order "HHC", "NF", "ALF", "Unk"
 test_function("factor", index = 3,
               not_called_msg = "Have you used `factor()` to create the factor variable?")
 
 							   
-#10 View the order of levels in `ClaimType.f`
+#10 View the order of levels in ClaimType.f
 test_function("levels", args = "ClaimTypef", index=4,
-              not_called_msg = "Have you used `level()` function to view the levels in the variable?",
+              not_called_msg = "Have you used level() function to view the levels in the variable?",
               args_not_specified = "Have you specified the correct variable name in the argument?",
-              incorrect_msg = c("Have you specified the variable name in the argument?"))
+              incorrect_msg = "Have you specified the variable name in the argument?")
 							   
-#11 Change the base level of variable `ClaimType.f` to "NF"
+#11 Change the base level of variable ClaimType.f to "NF"
 test_function("relevel", args = c("ClaimTypef","NFvalue"), index=2,
-              not_called_msg = "Have you used `relevel()` to change the levels in a factor variable?",
-              args_not_specified = "Have you specified the variable name and the base level value?",
+              not_called_msg = "Have you used relevel() to change the levels in a factor variable?",
+              args_not_specified = c("Have you used factor variable name to change the level?",
+                                     "Have you specified the base level value?"),
               incorrect_msg = c("Have you used factor variable name to change the level?",
                                "Have you specified the base level value?"))
      
