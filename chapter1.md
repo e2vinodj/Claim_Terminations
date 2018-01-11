@@ -1118,8 +1118,8 @@ test_function("group_by", args = c("Gender", "IncurredAgeBucket"),
               index=2,
               not_called_msg = "Have you used the function to Group the records?",
               args_not_specified = "Have you specified the columns to group by? ",
-              incorrect_msg = c("Have you used the function to Group the records?",
-                               "Have you specified the columns to group by? "))
+              incorrect_msg = c("Have you specified Gender to group by?",
+                               "Have you specified the IncurredAgeBucket to group by? "))
 
 
 test_error()
@@ -1203,11 +1203,12 @@ My_List
 ```{r}
 
 #2 Populate a list with 100 uniform random numbers between 0 & 1
-test_function("runif", args = c("100","0","1"),
+test_function("runif", args = c("n","mi","mx"),
               not_called_msg = "Have you used `runif()` to generate the uniform random numbers?",
               args_not_specified = "Have you specified the correct arguments?",
-              incorrect_msg = c("Have you used `runif()` to generate the uniform random numbers?",
-                               "Have you specified the correct arguments?"))
+              incorrect_msg = c("Have you specified the total number of random numbers?",
+                                "Have you specified the lower limit of the random number?",
+                               "Have you specified the upper limit of the random number?"))
               
 test_error()
 success_msg("Good work!")
@@ -1404,23 +1405,21 @@ relevel(ClaimType.f, "NF")
 #9 Make a new variable `ClaimType.f` as a factor and populate the value from `ClaimType` in ctr_data table. 
 # Do Not add `ClaimType.f` as a column in the table ctr_data. Order the factors in the order "HHC", "NF", "ALF", "Unk"
 test_function("factor", index = 3,
-              not_called_msg = "Have you used `factor()` to create the factor variable?",
-              incorrect_msg = "Have you used `factor()` to create the factor variable?")
+              not_called_msg = "Have you used `factor()` to create the factor variable?")
 
 							   
 #10 View the order of levels in `ClaimType.f`
-test_function("levels", args = "ClaimType.f", index=4,
+test_function("levels", args = "ClaimTypef", index=4,
               not_called_msg = "Have you used `level()` function to view the levels in the variable?",
-              args_not_specified = "Have you specified the correct varaible name in the argument?",
-              incorrect_msg = c("Have you used `level()` function to view the levels in the variable? ",
-                               "Have you specified the correct varaible name in the argument?"))
+              args_not_specified = "Have you specified the correct variable name in the argument?",
+              incorrect_msg = c("Have you specified the variable name in the argument?"))
 							   
 #11 Change the base level of variable `ClaimType.f` to "NF"
-test_function("relevel", args = c('ClaimType.f','"NF"'), index=2,
+test_function("relevel", args = c("ClaimTypef","NFvalue"), index=2,
               not_called_msg = "Have you used `relevel()` to change the levels in a factor variable?",
-              args_not_specified = "Have you specified the correct variable name and the base level value?",
-              incorrect_msg = c("Have you used `relevel()` to change the levels in a factor variable?",
-                               "Have you specified the correct variable name and the base level value?"))
+              args_not_specified = "Have you specified the variable name and the base level value?",
+              incorrect_msg = c("Have you used factor variable name to change the level?",
+                               "Have you specified the base level value?"))
      
 test_error()
 success_msg("Good work!")
