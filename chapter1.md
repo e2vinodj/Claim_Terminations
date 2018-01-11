@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: f97fc5c8ba
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 8addbe4d39
+key: 
 xp: 50
 ```
 
@@ -125,14 +125,14 @@ Type the `?` in front of the function names like `?library()` in the R console t
 
 
 #2 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
-str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 		   
 	   
 #3 Unload the package `stringr` from your R session
 
 
 #4 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
-str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 
 ```
 
@@ -143,14 +143,14 @@ str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
 library(stringr)
 
 #2 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
-str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 		   
 	   
 #3 Unload the package `stringr` from your R session
 detach(package:stringr)
 
 #4 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
-str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 
 ```
 
