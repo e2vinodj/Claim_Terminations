@@ -7,7 +7,7 @@ description : Work on R functions we will use at workshop.
 
 ```yaml
 type: NormalExercise
-key: 
+key: 459aa8cdaa
 lang: r
 skills: 1
 ```
@@ -69,7 +69,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: f5311b7de5
 lang: r
 ```
 
@@ -88,7 +88,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: 3e0a9f3b88
 ```
 
 A R package typically includes several functions and sometimes even data sets within it. Some packages are included with the Base R version.  There are several other R packages developed by the community that can be reused by you to perform simple to complex tasks without having to reinvent the wheel. These packages must be downloaded and installed  from CRAN-like repositories or from local files. You can use the function `install.packages("package name in quotes")` to install packages in your system. This is often an onetime task.
@@ -115,7 +115,7 @@ Type the `?` in front of the function names like `?library()` in the R console t
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: ddea187fd4
 xp: 50
 ```
 
@@ -201,8 +201,7 @@ type: NormalExercise
 lang: r
 xp: 50
 skills: 1
-key: 
-
+key: 0b40057779
 ```
 In the next few exercises, we will explore the data file that will be used at the the workshop. Claim termination rate (CTR) data has been extracted from the SOA experience database and modified for workshop purposes.The modified data is downloaded here as a R Data table and is named 'ctr_data'.
 
@@ -308,7 +307,7 @@ type: MultipleChoiceExercise
 lang: r
 xp: 20
 skills: 1
-key: 
+key: dab375c9ff
 ```
 
 
@@ -357,7 +356,7 @@ type: NormalExercise
 lang: r
 xp: 50
 skills: 1
-key: 
+key: cc38162081
 ```
 
 R objects that reside in other R objects can require a lot of typing to access. For example, to refer to a variable x in a dataframe df, one could type df$x. The attach() function helps to reference the database variables by their name alone without using the table name. Using the function will attach the  database to the R search path. This means that the database is searched by R when evaluating a variable. By default the database is attached in position 2 in the search path, immediately after the user's workspace and before all previously attached packages and previously attached databases. However use this function with caution, as it can easily lead to referencing a wrong object with same name.
@@ -463,7 +462,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 xp: 100
-key: 
+key: 13c07d42c4
 ```
 
 `@pre_exercise_code`
@@ -544,7 +543,7 @@ type: NormalExercise
 lang: r
 xp: 50
 skills: 1
-key: 
+key: 5f8a281c76
 ```
 
 A new data frame or a data table can be created from an existing data frame or table using the Assignment operator `<-`.
@@ -629,7 +628,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: e6a60bf804
 lang: r
 ```
 
@@ -648,7 +647,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: d9c7c56d60
 xp: 50
 ```
 
@@ -709,7 +708,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: f755deced6
 xp: 50
 ```
 
@@ -799,7 +798,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: bf930e5f6e
 xp: 50
 ```
 
@@ -864,7 +863,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: 2667dadeae
 xp: 50
 ```
 
@@ -976,7 +975,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: b4e6d5f13e
 xp: 50
 ```
 
@@ -1057,7 +1056,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: 8f4c9f87b5
 xp: 50
 ```
 
@@ -1132,8 +1131,7 @@ type: NormalExercise
 lang: r
 xp: 50
 skills: 1
-key: 
-
+key: 66853dd6c4
 ```
 Random Numbers
 ==============
@@ -1218,7 +1216,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: 8d8ffa7d97
 lang: r
 ```
 
@@ -1238,7 +1236,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key:
+key: 603a7e832f
 xp: 50
 ```
 
@@ -1284,8 +1282,7 @@ type: NormalExercise
 lang: r
 xp: 200
 skills: 1
-key: 
-
+key: '5163299628'
 ```
 
 `@instructions`
