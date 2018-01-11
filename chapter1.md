@@ -89,12 +89,13 @@ unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
 ```
+
 ***
 
 ```yaml
 type: NormalExercise
 lang: r
-key: 3e0a9f3b88
+key: 
 xp:50
 ```
 
@@ -110,8 +111,7 @@ Type the `?` in front of the function names like `?library()` in the R console t
 `@instructions`
 
 - Run the code in "Script.R" as-is by clicking on the button "Run Code". See the results.
-  Note the message for the code below comment #2: `str_detect(ctr_data$Diagnosis_Category, "Alzheimer")`
-  If you don’t have the package `stringr` loaded in your session, you will get an error message - Error: could not find function "str_detect".
+  Note the message for the code below comment #2: If you donot have the package `stringr` loaded in your session, you will get an error message - Error: could not find function "str_detect".
  
 - Now type the following below comment #1 to load the package `stringr` in your session. Then Click on the button "Run Code": `library(stringr)`.
   Now see the results of the code under comment #2. There should not be an error.
@@ -120,7 +120,6 @@ Type the `?` in front of the function names like `?library()` in the R console t
 
 - Now Click on the button "Submit Code". The results of the code under comment #4 should have an error.
 
-- 
 
 `@sample_code`
 ```{r}
