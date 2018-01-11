@@ -63,7 +63,7 @@ a
 
 `@sct`
 ```{r}
-test_output(a)
+test_output_contains(a)
 test_error()
 success_msg("Good work!")
 ```
