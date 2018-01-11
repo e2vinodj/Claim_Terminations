@@ -63,7 +63,7 @@ a
 
 `@sct`
 ```{r}
-test_output_contains(a)
+test_output_contains(a,3)
 test_error()
 success_msg("Good work!")
 ```
@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 99933167c4
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: b46230f763
+key: 
 xp: 50
 ```
 
@@ -111,12 +111,15 @@ Type the `?` in front of the function names like `?library()` in the R console t
 - Run the code in "Script.R" as-is by clicking on the button "Run Code". See the results.
   Note the message for the code below comment #2: If you donot have the package `stringr` loaded in your session, you will get an error message - Error: could not find function "str_detect".
  
-- Now type the following below comment #1 to load the package `stringr` in your session. Then Click on the button "Run Code": `library(stringr)`.
+- Type the following below comment #1 to load the package `stringr` in your session. Then Click on the button "Run Code": `library(stringr)`.
   Now see the results of the code under comment #2. There should not be an error.
 
-- Now type the following below comment #3 to unload the package `stringr` from memory: `detach(package:stringr)`
+- Type the following below comment #3 to unload the package `stringr` from memory: `detach(package:stringr)`
 
-- Now Click on the button "Submit Code". The results of the code under comment #4 should have an error.
+- Click on the button "Run Code". Then type the code with `str_detect()` under the comment #2 into your console and see the results. 
+  It will give error as the library `stringr` is no longer in the session.
+
+- Click on the button "Submit Answer".
 
 
 `@sample_code`
@@ -130,9 +133,6 @@ str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 	   
 #3 Unload the package `stringr` from your R session
 
-
-#4 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
-str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 
 ```
 
@@ -148,9 +148,6 @@ str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 	   
 #3 Unload the package `stringr` from your R session
 detach(package:stringr)
-
-#4 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
-str_detect(ctr_data$Diagnosis_Category, "Alzheimer")
 
 ```
 
