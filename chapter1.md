@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: dab4dcfed1
+key: 
 lang: r
 ```
 
@@ -93,10 +93,12 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 9564c38e5b
-xp: 50
+key: 
+xp: 25
 ```
 
+
+`@instructions`
 A R package typically includes several functions and sometimes even data sets within it. Some packages are included with the Base R version.  There are several other R packages developed by the community that can be reused by you to perform simple to complex tasks without having to reinvent the wheel. These packages must be downloaded and installed  from CRAN-like repositories or from local files. You can use the function `install.packages("package name in quotes")` to install packages in your system. This is often an onetime task.
 
 To use a function or data from the other packages, we must load the package into the session before calling the function. To load a package use the function 'library(package name without quotes)`. 
@@ -104,6 +106,16 @@ To use a function or data from the other packages, we must load the package into
 To unload a package from the memory, use the function `detach()`.
 
 Type the `?` in front of the function names like `?library()` in the R console to read the R documentation for it. You can do this for any function.
+
+
+***
+
+```yaml
+type: NormalExercise
+lang: r
+key: 
+xp: 50
+```
 
 
 `@instructions`
