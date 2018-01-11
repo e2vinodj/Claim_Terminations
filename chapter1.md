@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: 04cc86ff71
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 70d8d7e23c
 xp: 25
 ```
 
@@ -113,7 +113,7 @@ Type the `?` in front of the function names like `?library()` in the R console t
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: c08e597ba1
 xp: 50
 ```
 
