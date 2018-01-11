@@ -185,10 +185,9 @@ ggplot() +
 `@sct`
 ```{r}
 test_function("library", args = "ggplot2",
-              not_called_msg = "Have you used the function to load the ggplot2() package?",
-              args_not_specified = "Have you specified the correct package name?",
-              incorrect_msg = c("Have you used the function to load the ggplot2() package? ",
-                               "Have you specified the correct package name?"))
+              not_called_msg = "Have you used the function to load the ggplot2 package?",
+              args_not_specified = "Have you specified the package name in the function?",
+              incorrect_msg = c("Have you provided the correct package name to load ggplot2?"))
 
 test_error()
 success_msg("Good work!")
@@ -274,23 +273,20 @@ names(ctr_data)
 #1 View the basic structure of the claim termination data table 'ctr_data'
 test_function("str", args = "ctr_data",
               not_called_msg = "Have you used `str()` to see the structure of the ctr_data table?",
-              args_not_specified = "Have you specified the correct table name?",
-              incorrect_msg = c("Have you used `str()` to include the ctr_data table? ",
-                               "Have you specified the correct table name?"))
+              args_not_specified = "Have you specified the table name?",
+              incorrect_msg = c("Have you specified the correct table name?"))
               
 #2 View the top rows from the claim termination data table 'ctr_data'
 test_function("head", args = "ctr_data",
               not_called_msg = "Have you used `head()` to see the top records from the ctr_data table?",
-              args_not_specified = "Have you specified the correct table name?",
-              incorrect_msg = c("Have you used `head()` to see the top records from the ctr_data table? ",
-                               "Have you specified the correct table name?"))
+              args_not_specified = "Have you specified the table name?",
+              incorrect_msg = c("Have you specified the correct table name?"))
               
 #3 View the column names in the claim termination data table 'ctr_data'
 test_function("names", args = "ctr_data",
               not_called_msg = "Have you used `names()` to see the variable names in the ctr_data table?",
-              args_not_specified = "Have you specified the correct table name?",
-              incorrect_msg = c("Have you used `names()` to see the variable names in the ctr_data table? ",
-                               "Have you specified the correct table name?"))
+              args_not_specified = "Have you specified the table name?",
+              incorrect_msg = c("Have you specified the correct table name?"))
               
 
 test_error()
@@ -440,15 +436,13 @@ ClaimType[1:50]
 ```{r}
 test_function("attach", args = "ctr_data",
               not_called_msg = "Have you used `attach()` to include the ctr_data table?",
-              args_not_specified = "Have you specified the correct table name to attach?",
-              incorrect_msg = c("Have you used `attach()` to include the ctr_data table? ",
-                               "Have you specified the table name to attach?"))
+              args_not_specified = "Have you specified the table name to attach?",
+              incorrect_msg = c("Have you specified the table name correctly to attach?"))
 
 test_function("detach", args = "ctr_data",
               not_called_msg = "Have you used `detach()` to remove the ctr_data table from search path?",
-              args_not_specified = "Have you specified the correct table name to detach?",
-              incorrect_msg = c("Have you used `detach()` to remove the ctr_data table from serach path? ",,
-                                "Have you specified the correct table name to detach?"))
+              args_not_specified = "Have you specified the table name to detach?",
+              incorrect_msg = c("Have you specified the correct table name to detach?"))
 
 test_error()
 success_msg("Good work!")
@@ -520,13 +514,13 @@ Add Gender as a argument in the table() function
 `@sct`
 ```{r}
 #1 View a tabular summary by Coverage type
-test_function("table", index=1, not_called_msg = "You didn't call `table() in the code after comment #1`!")
+test_function("table", args = c("x"), index=1, not_called_msg = "You didn't call `table() in the code after comment #1`!")
 
 #2 View a tabular summary by Coverage type and Group Indicator
-test_function("table", index=2, not_called_msg = "You didn't call `table() in the code after comment #2`!")
+test_function("table", args = c("x","y"), index=2, not_called_msg = "You didn't call `table() in the code after comment #2`!")
 
 #3 View a tabular summary by Coverage type, Group Indicator and Gender
-test_function("table", index=3, not_called_msg = "You didn't call `table() in the code after comment #3`!")
+test_function("table", args = c("x","y","z"), index=3, not_called_msg = "You didn't call `table() in the code after comment #3`!")
 
 test_error()
 success_msg("Good work!")
@@ -691,9 +685,8 @@ library(dplyr)
 ```{r}
 test_function("library", args = "dplyr",
               not_called_msg = "Have you used the function to load the `dplyr` package?",
-              args_not_specified = "Have you specified the correct package name?",
-              incorrect_msg = c("Have you used the function to load the `dplyr` package? ",
-                               "Have you specified the correct package name?"))
+              args_not_specified = "Have you specified the package name - dplyr?",
+              incorrect_msg = c("Have you specified the correct package name?"))
 
 
 test_error()
@@ -770,24 +763,32 @@ test_function("select", args = c("ctr_data", "fake_claim_id", "Gender", "Claim_T
               index=1,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = "Have you specified, all the 4 column names as in the table?",
-              incorrect_msg = c("Have you used the function to select the columns? ",
-                               "Have you specified, all the 4 column names as in the table?"))
+              incorrect_msg = c("Have you specified the table name correctly in the function?",
+                                "Have you specified the column 'fake_claim_id'?",
+                                "Have you specified the column 'Gender'?",
+                                "Have you specified the column 'Claim_Type'?",
+                                "Have you specified the column 'Max_Ben_Bucket'?"
+                                ))
 
 
 test_function("select", args = c("temp_ctr_data", "-fake_claim_id"),
               index=2,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = "Have you specified the column names to keep/remove and are they named as in the table?",
-              incorrect_msg = c("Have you used the function to select the columns? ",
-                               "Have you specified the column names to keep/remove and are they named as in the table?"))
+              incorrect_msg = c("Have you specified the table name correctly in the function?",
+                                "Have you specified the column 'fake_claim_id' to remove?"
+                               ))
 
 test_function("select", args = c("ctr_data", "TQ_Status", "Cov_Type_Bucket", "Terminations"),
               index=3,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = "Have you specified, all the 3 column names as in the table?",
-              incorrect_msg = c("Have you used the function to select the columns? ",
-                               "Have you specified, all the 3 column names as in the table?"))
-
+              incorrect_msg = c("Have you specified the table name correctly in the function?",
+                                "Have you specified the column 'TQ_Status'?",
+                                "Have you specified the column 'Cov_Type_Bucket'?",
+                                "Have you specified the column 'Terminations'?"
+                               ))
+test_object(new_ctr_data)
 test_error()
 success_msg("Good work!")
 ```
@@ -814,11 +815,11 @@ Type `?filter()` in the R console to read the R documentation for it.
 
 
 `@hint`
-Use `filter(column names)` function to select the rows from a table or dataframe.
+Use `filter(column names)` function to select the rows from a table or dataframe. Use `==` to compare equal
 
 `@sample_code`
 ```{r}
-#1 Pick only the records with Claim Type = "HHC" OR "ALF" from the 'ctr_data' table
+#1 select only the records with Claim Type = "HHC" OR "ALF" from the 'ctr_data' table
 
 
 #2 Select only the records where Gender is "Female" and IncurredAgeBucket is "80 to 84" and Max_Ben_Bucket is Not "Unlimited" from the ctr_data table
@@ -830,7 +831,7 @@ Use `filter(column names)` function to select the rows from a table or dataframe
 `@solution`
 ```{r}
 #1 select only the records with Claim Type = "HHC" OR "ALF" from the 'ctr_data' table
-filter(ctr_data, ClaimType = "HHC" | ClaimType = "ALF")
+filter(ctr_data, ClaimType == "HHC" | ClaimType == "ALF")
 
 #2 Select only the records where Gender is "Female" and IncurredAgeBucket is "80 to 84" and Max_Ben_Bucket is Not "Unlimited" from the ctr_data table
 filter(ctr_data, Gender == "Female",  IncurredAgeBucket == "80 to 84", Max_Ben_Bucket != "Unlimited")
@@ -839,19 +840,15 @@ filter(ctr_data, Gender == "Female",  IncurredAgeBucket == "80 to 84", Max_Ben_B
 
 `@sct`
 ```{r}
-test_function("filter", args = c('ctr_data', 'ClaimType = "HHC" | ClaimType = "ALF"'),
+test_function("filter", args = c('ctr_data', "..."),
               index=1,
               not_called_msg = "Have you used the function to select the records?",
-              args_not_specified = "Have you specified the condition correctly to select the records",
-              incorrect_msg = c("Have you used the function to select the records? ",
-                               "Have you specified the condition to select the records"))
+              args_not_specified = "Have you specified the table and conditions correctly to select the records")
 
-test_function("filter", args = c('ctr_data', 'Gender == "Female','IncurredAgeBucket == "80 to 84"','Max_Ben_Bucket != "Unlimited"'),
+test_function("filter", args = c('ctr_data', "..."),
               index=2,
               not_called_msg = "Have you used the function to select the records?",
-              args_not_specified = "Have you specified the condition correctly to select the records",
-              incorrect_msg = c("Have you used the function to select the records? ",
-                               "Have you specified the condition to select the records"))
+              args_not_specified = "Have you specified the table and conditions correctly to select the records")
 
 test_error()
 success_msg("Good work!")
@@ -878,6 +875,8 @@ Type `?mutate()` in the R console to read the R documentation for it.
 - The code below comment #4 shows how to create a new column 'Confined_Sample' from another new column 'Confined_Ind', created all in the same `mutate()` function: 
 
 - Now type the code using mutate() function below comment #7, to create a new column `BP_Type` in ctr_data table. Populate it as "Lifetime" when the corresponding record has Max_Ben_Bucket = "Unlimited" else populate it with "Non-Life":
+
+- The code below comment #8 allows to print the value in BP_Type for the first 50 records
 
 
 `@hint`
@@ -914,8 +913,11 @@ str(ctr_data)
 #6 See the top records from 'ctr_data' table
 head(ctr_data(50))
 
-#7 Create a new column `BP_Type` in ctr_data table. Populate it as "Lifetime" when the corresponding record has Max_Ben_Bucket = "Unlimited" else populate it with "Non-Life".
+#7 Create a new column `BP_Type` in ctr_data table using mutate function. Populate it as "Lifetime" when the corresponding record has Max_Ben_Bucket = "Unlimited" else populate it with "Non-Life".
 
+
+#8 Print the values in `BP_Type` of the first 50 records from 'ctr_data' table
+ctr_data[1:50,]$BP_Type
 
 ```
 
@@ -950,21 +952,23 @@ str(ctr_data)
 #6 See the top records from 'ctr_data' table
 head(ctr_data(50))
 
-#7 Create a new column `BP_Type` in ctr_data table. Populate it as "Lifetime" when the corresponding record has Max_Ben_Bucket = "Unlimited" else populate it with "Non-Life".
+#7 Create a new column `BP_Type` in ctr_data table using mutate function. Populate it as "Lifetime" when the corresponding record has Max_Ben_Bucket = "Unlimited" else populate it with "Non-Life".
 mutate(ctr_data, BP_Type  = if_else(Max_Ben_Bucket == "Unlimited",  "Lifetime",  "Non-Life" ))
+
+#8 Print the values in `BP_Type` of the first 50 records from 'ctr_data' table
+ctr_data[1:50,]$BP_Type
 
 ```
 
 `@sct`
 ```{r}
-test_function("mutate", args = c('ctr_data', 'BP_Type  = if_else(Max_Ben_Bucket == "Unlimited",  "Lifetime",  "Non-Life" )'),
+test_function("mutate",
               index=3,
-              not_called_msg = "Have you used the function to modify the records?",
-              args_not_specified = "Have you specified the correct expression to create the new variable BP_TYPE",
-              incorrect_msg = c("Have you used the function to modify the records?",
-                               "Have you specified the correct expression to create the new variable BP_TYPE"))
+              not_called_msg = "Have you used the mutate function to modify the records?")
 
 
+test_output_contains("ctr_data[1:50,]$BP_Type",
+                     times = 1)
 test_error()
 success_msg("Good work!")
 ```
