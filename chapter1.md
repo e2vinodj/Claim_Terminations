@@ -27,6 +27,10 @@ Note: All the packages necessary for the exercises will be added to the R sessio
 - Type the following in the script editor below the comment #2: a <- a + 6. 
 
 
+`@hint`
+Type under comment #2: a <- a + 6
+
+
 `@pre_exercise_code`
 ```{r}
 library(data.table)
@@ -59,6 +63,7 @@ a
 
 `@sct`
 ```{r}
+test_output(a)
 test_error()
 success_msg("Good work!")
 ```
