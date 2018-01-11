@@ -783,7 +783,7 @@ test_function("select", args = c("temp_ctr_data", "-fake_claim_id"),
               incorrect_msg = c("Have you used the function to select the columns? ",
                                "Have you specified the column names to keep/remove and are they named as in the table?"))
 
-test_function("select", args = c("ctr_data", "TQ_Status", "Gender", "Cov_Type_Bucket", "Terminations"),
+test_function("select", args = c("ctr_data", "TQ_Status", "Cov_Type_Bucket", "Terminations"),
               index=3,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = "Have you specified, all the 3 column names as in the table?",
@@ -959,7 +959,7 @@ mutate(ctr_data, BP_Type  = if_else(Max_Ben_Bucket == "Unlimited",  "Lifetime", 
 
 `@sct`
 ```{r}
-test_function("mutate", args = c("ctr_data", "BP_Type  = if_else(Max_Ben_Bucket == ""Unlimited"",  ""Lifetime"",  ""Non-Life"" )"),
+test_function("mutate", args = c("ctr_data", "BP_Type  = if_else(Max_Ben_Bucket == ""Unlimited""",  ""Lifetime"",  """Non-Life""" )"),
               index=3,
               not_called_msg = "Have you used the function to modify the records?",
               args_not_specified = "Have you specified the correct expression to create the new variable BP_TYPE",
