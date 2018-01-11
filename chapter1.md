@@ -74,14 +74,13 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: f5311b7de5
+key: 
 lang: r
 ```
 
 `@pre_exercise_code`
 ```{r}
 library(data.table)
-library(dplyr)
 
 temp <- tempfile()
 download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
@@ -89,14 +88,13 @@ unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
 ```
-
 ***
 
 ```yaml
 type: NormalExercise
 lang: r
 key: 
-xp:50
+xp: 50
 ```
 
 A R package typically includes several functions and sometimes even data sets within it. Some packages are included with the Base R version.  There are several other R packages developed by the community that can be reused by you to perform simple to complex tasks without having to reinvent the wheel. These packages must be downloaded and installed  from CRAN-like repositories or from local files. You can use the function `install.packages("package name in quotes")` to install packages in your system. This is often an onetime task.
