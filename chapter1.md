@@ -435,14 +435,14 @@ ClaimType[1:50]
 `@sct`
 ```{r}
 test_function("attach", args = "ctr_data",
-              not_called_msg = "Have you used `attach()` to include the ctr_data table?",
+              not_called_msg = "Have you used attach() to include the ctr_data table?",
               args_not_specified = "Have you specified the table name to attach?",
-              incorrect_msg = c("Have you specified the table name correctly to attach?"))
+              incorrect_msg = "Have you specified the table name correctly to attach?")
 
 test_function("detach", args = "ctr_data",
-              not_called_msg = "Have you used `detach()` to remove the ctr_data table from search path?",
+              not_called_msg = "Have you used detach() to remove the ctr_data table from search path?",
               args_not_specified = "Have you specified the table name to detach?",
-              incorrect_msg = c("Have you specified the correct table name to detach?"))
+              incorrect_msg = "Have you specified the correct table name to detach?")
 
 test_error()
 success_msg("Good work!")
@@ -514,13 +514,13 @@ Add Gender as a argument in the table() function
 `@sct`
 ```{r}
 #1 View a tabular summary by Coverage type
-test_function("table", args = c("x"), index=1, not_called_msg = "You didn't call `table() in the code after comment #1`!")
+test_function("table", args = c("x"), index=1, not_called_msg = "You didn't call table() in the code after comment #1")
 
 #2 View a tabular summary by Coverage type and Group Indicator
-test_function("table", args = c("x","y"), index=2, not_called_msg = "You didn't call `table() in the code after comment #2`!")
+test_function("table", args = c("x","y"), index=2, not_called_msg = "You didn't call table() in the code after comment #2")
 
 #3 View a tabular summary by Coverage type, Group Indicator and Gender
-test_function("table", args = c("x","y","z"), index=3, not_called_msg = "You didn't call `table() in the code after comment #3`!")
+test_function("table", args = c("x","y","z"), index=3, not_called_msg = "You didn't call table() in the code after comment #3")
 
 test_error()
 success_msg("Good work!")
