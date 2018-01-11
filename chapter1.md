@@ -63,7 +63,7 @@ a
 
 `@sct`
 ```{r}
-test_output_contains(a,3)
+test_output_contains("a")
 test_error()
 success_msg("Good work!")
 ```
@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 01830c359b
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 938d2053bc
+key: 
 xp: 50
 ```
 
