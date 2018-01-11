@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 837fef9abb
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: c0a533e6e5
+key: 
 xp: 25
 ```
 
@@ -113,7 +113,7 @@ Type the `?` in front of the function names like `?library()` in the R console t
 ```yaml
 type: NormalExercise
 lang: r
-key: aba35fa8d7
+key: 
 xp: 50
 ```
 
@@ -166,12 +166,10 @@ detach(package:stringr)
 `@sct`
 ```{r}
 test_function("library", args = "obj1",
-              not_called_msg = "Have you used the function to load the stringr package?",
-              incorrect_msg = "Have you provided the correct package name to load stringr?")
+              not_called_msg = "Have you used the function to load the stringr package?")
 
 test_function("detach", args = "obj2",
-              not_called_msg = "Have you used the function to unload the stringr package?",
-              incorrect_msg = "Have you provided the correct package name to unload stringr?")
+              not_called_msg = "Have you used the function to unload the stringr package?")
               
 test_error()
 success_msg("Good work!")
