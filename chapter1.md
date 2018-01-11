@@ -187,7 +187,7 @@ ggplot() +
 test_function("library", args = "ggplot2",
               not_called_msg = "Have you used the function to load the ggplot2 package?",
               args_not_specified = "Have you specified the package name in the function?",
-              incorrect_msg = c("Have you provided the correct package name to load ggplot2?"))
+              incorrect_msg = "Have you provided the correct package name to load ggplot2?")
 
 test_error()
 success_msg("Good work!")
