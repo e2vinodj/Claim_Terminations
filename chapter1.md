@@ -76,6 +76,7 @@ lang: r
 `@pre_exercise_code`
 ```{r}
 library(data.table)
+library(dplyr)
 
 temp <- tempfile()
 download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
@@ -184,9 +185,9 @@ ggplot() +
 `@sct`
 ```{r}
 test_function("library", args = "ggplot2",
-              not_called_msg = "Have you used the function to load the `ggplot2` package?",
+              not_called_msg = "Have you used the function to load the ggplot2() package?",
               args_not_specified = "Have you specified the correct package name?",
-              incorrect_msg = c("Have you used the function to load the `ggplot2` package? ",
+              incorrect_msg = c("Have you used the function to load the ggplot2() package? ",
                                "Have you specified the correct package name?"))
 
 test_error()
