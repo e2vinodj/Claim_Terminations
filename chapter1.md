@@ -1150,12 +1150,12 @@ xp: 50
 skills: 1
 key: 66853dd6c4
 ```
-Random Numbers
-==============
+Random Numbers:
+
 A pseudo random number generator is an algorithm based on a starting point called "seed".  To perform an exact replication of your program, specify the seed using the function set.seed(). The argument of set.seed has to be an integer.
 
-The Uniform distributions in R.
-==============================
+The Uniform distributions in R:
+
 The function dunif() gives the density, punif() gives the distribution function, qunif() gives the quantile function, and runif() generates random deviates.  
 
 Type the `?` in front of the function names like `?dunif()` in the R console to read the R documentation.
