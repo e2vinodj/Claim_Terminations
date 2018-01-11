@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: e6d2536483
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: e5a91b37bb
+key: 
 xp: 25
 ```
 
@@ -113,7 +113,7 @@ Type the `?` in front of the function names like `?library()` in the R console t
 ```yaml
 type: NormalExercise
 lang: r
-key: 53856dad8a
+key: 
 xp: 50
 ```
 
@@ -309,10 +309,10 @@ unlink(temp)
 
 
 #2 View the top rows from the claim termination data table 'ctr_data'
-
+head()
 
 #3 View the column names in the claim termination data table 'ctr_data'
-
+names()
 
 ```
 
@@ -335,22 +335,13 @@ names(ctr_data)
 ```{r}
 
 #1 View the basic structure of the claim termination data table 'ctr_data'
-test_function("str", args = "ctr_data",
-              not_called_msg = "Have you used str() to see the structure of the ctr_data table?",
-              args_not_specified = "Have you specified the table name?",
-              incorrect_msg = "Have you specified the correct table name?")
+test_function("str", not_called_msg = "Have you used str() to see the structure of the ctr_data table?")
               
 #2 View the top rows from the claim termination data table 'ctr_data'
-test_function("head", args = "ctr_data",
-              not_called_msg = "Have you used head() to see the top records from the ctr_data table?",
-              args_not_specified = "Have you specified the table name?",
-              incorrect_msg = "Have you specified the correct table name?")
+test_function("head",  not_called_msg = "Have you used head() to see the top records from the ctr_data table?")
               
 #3 View the column names in the claim termination data table 'ctr_data'
-test_function("names", args = "ctr_data",
-              not_called_msg = "Have you used names() to see the variable names in the ctr_data table?",
-              args_not_specified = "Have you specified the table name?",
-              incorrect_msg = "Have you specified the correct table name?")
+test_function("names", not_called_msg = "Have you used names() to see the variable names in the ctr_data table?")
               
 
 test_error()
