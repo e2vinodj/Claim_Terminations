@@ -95,6 +95,7 @@ unlink(temp)
 type: NormalExercise
 lang: r
 key: 3e0a9f3b88
+xp:50
 ```
 
 A R package typically includes several functions and sometimes even data sets within it. Some packages are included with the Base R version.  There are several other R packages developed by the community that can be reused by you to perform simple to complex tasks without having to reinvent the wheel. These packages must be downloaded and installed  from CRAN-like repositories or from local files. You can use the function `install.packages("package name in quotes")` to install packages in your system. This is often an onetime task.
@@ -108,13 +109,69 @@ Type the `?` in front of the function names like `?library()` in the R console t
 
 `@instructions`
 
-- Type the following below comment #2: `str_detect(ctr_data$Diagnosis_Category, "Alzheimer")`
+- Run the code in "Script.R" as-is by clicking on the button "Run Code". See the results.
+  Note the message for the code below comment #2: `str_detect(ctr_data$Diagnosis_Category, "Alzheimer")`
   If you don’t have the package `stringr` loaded in your session, you will get an error message - Error: could not find function "str_detect".
  
-- Now type the following below comment #1 to load the package `stringr` loaded in your session and submit the code: `library(stringr)`
+- Now type the following below comment #1 to load the package `stringr` in your session. Then Click on the button "Run Code": `library(stringr)`.
+  Now see the results of the code under comment #2. There should not be an error.
 
 - Now type the following below comment #3 to unload the package `stringr` from memory: `detach(package:stringr)`
 
+- Now Click on the button "Submit Code". The results of the code under comment #4 should have an error.
+
+- 
+
+`@sample_code`
+```{r}
+#1 Load the package `stringr` into your R session
+
+
+#2 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+		   
+	   
+#3 Unload the package `stringr` from your R session
+
+
+#4 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+
+```
+
+
+`@solution`
+```{r}
+#1 Load the package `stringr` into your R session
+library(stringr)
+
+#2 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+		   
+	   
+#3 Unload the package `stringr` from your R session
+detach(package:stringr)
+
+#4 Check if the column Diagnosis_Category in ctr_data table contains "Alzheimer"
+str_detect(ctr_data$Diagnosis_Category, "Alzheimer"
+
+```
+
+`@sct`
+```{r}
+test_function("library", args = "stringr",
+              not_called_msg = "Have you used the function to load the stringr package?",
+              args_not_specified = "Have you specified the package name in the function?",
+              incorrect_msg = "Have you provided the correct package name to load stringr?")
+
+test_function("detach", args = "stringr",
+              not_called_msg = "Have you used the function to unload the stringr package?",
+              args_not_specified = "Have you specified the package name in the function?",
+              incorrect_msg = "Have you provided the correct package name to unload stringr?")
+              
+test_error()
+success_msg("Good work!")
+```
 
 ***
 
