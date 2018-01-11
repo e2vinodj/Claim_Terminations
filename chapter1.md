@@ -42,7 +42,7 @@ Use `names(table_name)` function to see the names of columns in a data frame or 
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6345/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
