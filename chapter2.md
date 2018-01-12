@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 
+key: 65f71da0d8
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 331edd4310
 xp: 25
 ```
 
@@ -54,7 +54,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 145dc4cd9b
 xp: 100
 ```
 
@@ -156,7 +156,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: fa64407fed
 xp: 100
 ```
 
@@ -339,7 +339,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: 1a8d4d6deb
 lang: r
 ```
 
@@ -359,7 +359,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 3d37e56b36
 xp: 100
 ```
 
@@ -513,7 +513,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 48dbbcb5bb
 xp: 100
 ```
 
