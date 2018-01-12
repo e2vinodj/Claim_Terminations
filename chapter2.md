@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: d20b710ce1
+key: 
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: fbe304cdea
+key: 
 xp: 25
 ```
 
@@ -41,7 +41,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 
 - Read the comments and the code. 
 
-- In this chapter, - First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- In this chapter, - First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -59,7 +59,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 ```yaml
 type: NormalExercise
 lang: r
-key: 46b2771299
+key: 
 xp: 100
 ```
 
@@ -75,7 +75,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 
 - Read the comments and the code. 
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -168,7 +168,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 9c67c46363
+key: 
 xp: 100
 ```
 
@@ -177,7 +177,7 @@ xp: 100
 
 - Now we are going to visually explore the data in the ctr_data table:  By Plotting graphs	   
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -354,7 +354,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: bba686c680
+key: 
 lang: r
 ```
 
@@ -374,7 +374,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 1fd5ccf0cf
+key: 
 xp: 100
 ```
 
@@ -389,7 +389,7 @@ xp: 100
  	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -533,7 +533,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 4d5c202461
+key: 
 xp: 100
 ```
 
@@ -542,7 +542,7 @@ xp: 100
 
 - Now we are going to split the data using the insights we obtained from our previous exercises.
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
