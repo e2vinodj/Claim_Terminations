@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 02ca0e5fe2
+key: 
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 22e4f387a9
+key: 
 xp: 25
 ```
 
@@ -54,7 +54,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: ab34604366
+key: 
 xp: 100
 ```
 
@@ -156,7 +156,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 179a826a0b
+key: 
 xp: 100
 ```
 
@@ -339,7 +339,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: da7c757442
+key: 
 lang: r
 ```
 
@@ -359,7 +359,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: '7195682417'
+key: 
 xp: 100
 ```
 
@@ -397,7 +397,7 @@ library(lubridate)
 
 # 1.5.2 - Add a current date variable so we can create an out-of-time holdout
 # Assume that claims were incurred at the middle of year, and are bounded between 2000 and 2011 
-ctr_data <- raw_data %>%
+ctr_data <- ctr_data %>%
   mutate(incurred_date = ymd(paste(Incurred_Year, "-07-01", sep="")),
          study_start = incurred_date %m+% months(start_duration -1),
          study_start_date = if_else(study_start < ymd("2000-01-01"),
@@ -460,7 +460,7 @@ library(lubridate)
 
 # 1.5.2 - Add a current date variable so we can create an out-of-time holdout
 # Assume that claims were incurred at the middle of year, and are bounded between 2000 and 2011 
-ctr_data <- raw_data %>%
+ctr_data <- ctr_data %>%
   mutate(incurred_date = ymd(paste(Incurred_Year, "-07-01", sep="")),
          study_start = incurred_date %m+% months(start_duration -1),
          study_start_date = if_else(study_start < ymd("2000-01-01"),
@@ -513,7 +513,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 4485eca5e3
+key: 
 xp: 100
 ```
 
