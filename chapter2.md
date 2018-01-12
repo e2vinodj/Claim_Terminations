@@ -5,13 +5,6 @@ description : Cox/ Poisson Modeling.
 
 ## Data Cleaning, Exploration and Feature Engineering
 
----
-title       : 2018 ILTCI Predictive Modelling Workshop - Prework
-description : Cox/ Poisson Modeling.
-
----
-
-## Data Cleaning, Exploration and Feature Engineering
 
 ```yaml
 type: TabExercise
