@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 0bb5306cd7
+key: 
 lang: r
 ```
 
@@ -94,7 +94,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: d89205b497
+key: 
 xp: 25
 ```
 
@@ -125,7 +125,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: d19109ff36
+key: 
 xp: 50
 ```
 
@@ -177,11 +177,9 @@ detach(package:stringr)
 
 `@sct`
 ```{r}
-test_function("library", arg = "obj1",
-              not_called_msg = "Have you used the function to load the stringr package?",
-              args_not_specified = "Have you specified the package name to load?",
-              incorrect_msg = "Have you specified the correct package name to load?")
-
+test_function("library", 
+              not_called_msg = "Have you used the function to load the stringr package?")
+              
 test_function("detach", arg = "obj2",
               not_called_msg = "Have you used the function to unload the stringr package?",
               args_not_specified = "Have you specified the package name to unload?",
@@ -586,13 +584,13 @@ Add Gender as a argument in the table() function
 `@sct`
 ```{r}
 #1 View a tabular summary by Coverage type
-test_function("table", arg = c("x"), index=1, not_called_msg = "You didn't call table() in the code after comment #1")
+test_function("table", index=1, not_called_msg = "You didn't call table() in the code after comment #1")
 
 #2 View a tabular summary by Coverage type and Group Indicator
-test_function("table", arg = c("x","y"), index=2, not_called_msg = "You didn't call table() in the code after comment #2")
+test_function("table", index=2, not_called_msg = "You didn't call table() in the code after comment #2")
 
 #3 View a tabular summary by Coverage type, Group Indicator and Gender
-test_function("table", arg = c("x","y","z"), index=3, not_called_msg = "You didn't call table() in the code after comment #3")
+test_function("table", index=3, not_called_msg = "You didn't call table() in the code after comment #3")
 
 test_error()
 success_msg("Good work!")
@@ -755,7 +753,7 @@ library(dplyr)
 
 `@sct`
 ```{r}
-test_function("library", arg = "pckg",
+test_function("library", arg = "pckg", index=2,
               not_called_msg = "Have you used the function to load the `dplyr` package?",
               args_not_specified = "Have you specified the package name - dplyr?",
               incorrect_msg = "Have you specified the correct package name?")
@@ -923,11 +921,11 @@ filter(ctr_data, Gender == "Female",  IncurredAgeBucket == "80 to 84", Max_Ben_B
 
 `@sct`
 ```{r}
-test_function("filter", arg = c('ctrdata', "..."),
+test_function("filter",
               index=1,
               not_called_msg = "Have you used the function to select the records?")
 
-test_function("filter", arg = c('ctrdat', "..."),
+test_function("filter",
               index=2,
               not_called_msg = "Have you used the function to select the records?")
 
