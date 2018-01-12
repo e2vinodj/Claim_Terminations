@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: b2af03af12
+key: 
 lang: r
 ```
 
@@ -94,7 +94,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 378d14b26a
+key: 
 xp: 25
 ```
 
@@ -125,7 +125,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: a17f3fa7e3
+key: 
 xp: 50
 ```
 
@@ -177,11 +177,16 @@ detach(package:stringr)
 
 `@sct`
 ```{r}
-test_function("library",
-              not_called_msg = "Have you used the function to load the stringr package?")
+test_function("library", arg = "obj1",
+              not_called_msg = "Have you used the function to load the stringr package?",
+              args_not_specified = "Have you specified the package name to load?",
+              incorrect_msg = "Have you specified the correct package name to load?")
 
-test_function("detach", 
-              not_called_msg = "Have you used the function to unload the stringr package?")
+test_function("detach", arg = "obj2",
+              not_called_msg = "Have you used the function to unload the stringr package?",
+              args_not_specified = "Have you specified the package name to unload?",
+              incorrect_msg = "Have you specified the correct package name to unload?")
+
               
 test_error()
 success_msg("Good work!")
@@ -260,7 +265,7 @@ ggplot() +
 
 `@sct`
 ```{r}
-test_function("library", args = "ggplot2",
+test_function("library", arg = "obj1",
               not_called_msg = "Have you used the function to load the ggplot2 package?",
               args_not_specified = "Have you specified the package name in the function?",
               incorrect_msg = "Have you provided the correct package name to load ggplot2?")
@@ -501,12 +506,12 @@ ClaimType[1:50]
 
 `@sct`
 ```{r}
-test_function("attach", args = "ctr_data",
+test_function("attach", arg = "ctrdata",
               not_called_msg = "Have you used attach() to include the ctr_data table?",
               args_not_specified = "Have you specified the table name to attach?",
               incorrect_msg = "Have you specified the table name correctly to attach?")
 
-test_function("detach", args = "ctr_data",
+test_function("detach", arg = "ctrdata",
               not_called_msg = "Have you used detach() to remove the ctr_data table from search path?",
               args_not_specified = "Have you specified the table name to detach?",
               incorrect_msg = "Have you specified the correct table name to detach?")
@@ -581,13 +586,13 @@ Add Gender as a argument in the table() function
 `@sct`
 ```{r}
 #1 View a tabular summary by Coverage type
-test_function("table", args = c("x"), index=1, not_called_msg = "You didn't call table() in the code after comment #1")
+test_function("table", arg = c("x"), index=1, not_called_msg = "You didn't call table() in the code after comment #1")
 
 #2 View a tabular summary by Coverage type and Group Indicator
-test_function("table", args = c("x","y"), index=2, not_called_msg = "You didn't call table() in the code after comment #2")
+test_function("table", arg = c("x","y"), index=2, not_called_msg = "You didn't call table() in the code after comment #2")
 
 #3 View a tabular summary by Coverage type, Group Indicator and Gender
-test_function("table", args = c("x","y","z"), index=3, not_called_msg = "You didn't call table() in the code after comment #3")
+test_function("table", arg = c("x","y","z"), index=3, not_called_msg = "You didn't call table() in the code after comment #3")
 
 test_error()
 success_msg("Good work!")
@@ -750,7 +755,7 @@ library(dplyr)
 
 `@sct`
 ```{r}
-test_function("library", args = "dplyr",
+test_function("library", arg = "pckg",
               not_called_msg = "Have you used the function to load the `dplyr` package?",
               args_not_specified = "Have you specified the package name - dplyr?",
               incorrect_msg = "Have you specified the correct package name?")
@@ -826,7 +831,7 @@ new_ctr_data <- select(ctr_data, TQ_Status, Cov_Type_Bucket, Terminations)
 
 `@sct`
 ```{r}
-test_function("select", args = c("ctr_data", "fake_claim_id", "Gender", "Claim_Type", "Max_Ben_Bucket"),
+test_function("select", arg = c("ctrdata", "fakeclaimid", "Gend", "ClmType", "Maxbucket"),
               index=1,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = c("Have you specified the table name correctly in the function?",
@@ -843,7 +848,7 @@ test_function("select", args = c("ctr_data", "fake_claim_id", "Gender", "Claim_T
                                 ))
 
 
-test_function("select", args = c("temp_ctr_data", "-fake_claim_id"),
+test_function("select", arg = c("tempdata", "fake_id"),
               index=2,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = c("Have you specified the table name correctly in the function?",
@@ -853,7 +858,7 @@ test_function("select", args = c("temp_ctr_data", "-fake_claim_id"),
                                 "Have you specified the column 'fake_claim_id' to remove?"
                                ))
 
-test_function("select", args = c("ctr_data", "TQ_Status", "Cov_Type_Bucket", "Terminations"),
+test_function("select", arg = c("ctrdata", "TQstatus", "CovBucket", "Termns"),
               index=3,
               not_called_msg = "Have you used the function to select the columns?",
               args_not_specified = c("Have you specified the table name correctly in the function?",
@@ -918,11 +923,11 @@ filter(ctr_data, Gender == "Female",  IncurredAgeBucket == "80 to 84", Max_Ben_B
 
 `@sct`
 ```{r}
-test_function("filter", args = c('ctr_data', "..."),
+test_function("filter", arg = c('ctrdata', "..."),
               index=1,
               not_called_msg = "Have you used the function to select the records?")
 
-test_function("filter", args = c('ctr_data', "..."),
+test_function("filter", arg = c('ctrdat', "..."),
               index=2,
               not_called_msg = "Have you used the function to select the records?")
 
@@ -1189,7 +1194,7 @@ ctr_data %>%
 
 `@sct`
 ```{r}
-test_function("group_by", args = c("Gender", "IncurredAgeBucket"),
+test_function("group_by", arg = c("Gndr", "IncBkt"),
               index=2,
               not_called_msg = "Have you used the function to Group the records?",
               args_not_specified =  c("Have you specified Gender to group by?",
@@ -1279,7 +1284,7 @@ My_List
 ```{r}
 
 #2 Populate a list with 100 uniform random numbers between 10 & 15
-test_function("runif", args = c("n","mi","mx"),
+test_function("runif", arg = c("n","mi","mx"),
               not_called_msg = "Have you used runif() to generate the uniform random numbers?",
               args_not_specified = c("Have you specified the total number of random numbers?",
                                      "Have you specified the lower limit of the random number?",
@@ -1487,13 +1492,13 @@ test_function("factor", index = 3,
 
 							   
 #10 View the order of levels in ClaimType.f
-test_function("levels", args = "ClaimTypef", index=4,
+test_function("levels", arg = "Clmtyp", index=4,
               not_called_msg = "Have you used level() function to view the levels in the variable?",
               args_not_specified = "Have you specified the correct variable name in the argument?",
               incorrect_msg = "Have you specified the variable name in the argument?")
 							   
 #11 Change the base level of variable ClaimType.f to "NF"
-test_function("relevel", args = c("ClaimTypef","NFvalue"), index=2,
+test_function("relevel", arg = c("Clmtp1","NFvalue"), index=2,
               not_called_msg = "Have you used relevel() to change the levels in a factor variable?",
               args_not_specified = c("Have you used factor variable name to change the level?",
                                      "Have you specified the base level value?"),
