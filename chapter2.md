@@ -1,4 +1,4 @@
 ---
-title       : 2018 ILTCI Predictive Modelling Workshop - Prework-2
+title       : Prework2-Cox/ Poisson Modeling
 description : Cox/ Poisson Modeling.
 ---

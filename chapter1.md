@@ -1,5 +1,5 @@
 ---
-title       : 2018 ILTCI Predictive Modelling Workshop - Prework
+title       : Prework-Work on R functions we will use at workshop
 description : Work on R functions we will use at workshop.
 
 ---
