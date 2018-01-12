@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 65f71da0d8
+key: 
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 331edd4310
+key: 
 xp: 25
 ```
 
@@ -39,9 +39,9 @@ xp: 25
 	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-- Read the comments and the code. Run the Code and Observe the results.
+- Read the comments and the code. In these exercises first click on the "RUN CODE" button to run the Code and Observe the results.
 
-Press the button 'Submit Answers' to go to next exercise.
+- Press the button 'Submit Answers' when you are ready to go to next exercise.
 
 `@sample_code`
 ```{r}
@@ -54,7 +54,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: 145dc4cd9b
+key: 
 xp: 100
 ```
 
@@ -68,7 +68,9 @@ xp: 100
 	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-Press the button 'Submit Answers' to go to next exercise.
+- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
+
+- Press the button 'Submit Answers' when you are ready to go to next exercise.
 
 Note: Refer the code in "0100 - Data Explore.r"
 
@@ -156,7 +158,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: fa64407fed
+key: 
 xp: 100
 ```
 
@@ -165,10 +167,10 @@ xp: 100
 
 - Now we are going to visually explore the data in the ctr_data table:  By Plotting graphs	   
 
-- Read the comments and the code. Run the Code and Observe the results.
-	   
+- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
 
-Press the button 'Submit Answers' to go to next exercise.
+- Press the button 'Submit Answers' when you are ready to go to next exercise.
+
 
 Note: Refer the code in "0100 - Data Explore.r"
 
@@ -339,7 +341,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 1a8d4d6deb
+key: 
 lang: r
 ```
 
@@ -359,7 +361,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 3d37e56b36
+key: 
 xp: 100
 ```
 
@@ -374,7 +376,10 @@ xp: 100
  	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-Press the button 'Submit Answers' to go to next exercise.
+- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
+
+- Press the button 'Submit Answers' when you are ready to go to next exercise.
+
 
 Note: Refer the code in "0150 - Separate data into train val test.r"
 
@@ -513,7 +518,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 48dbbcb5bb
+key: 
 xp: 100
 ```
 
@@ -522,11 +527,10 @@ xp: 100
 
 - Now we are going to split the data using the insights we obtained from our previous exercises.
 
-- Read the comments and the code. Run the Code and Observe the results.
-	   
-Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
+- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
 
-Press the button 'Submit Answers' to go to next exercise.
+- Press the button 'Submit Answers' when you are ready to go to next exercise.
+
 
 Note: Refer the code in "0150 - Separate data into train val test.r"
 
