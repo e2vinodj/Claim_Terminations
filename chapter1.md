@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 04cc86ff71
+key: 
 lang: r
 ```
 
@@ -93,7 +93,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 70d8d7e23c
+key: 
 xp: 25
 ```
 
@@ -107,13 +107,24 @@ To unload a package from the memory, use the function `detach()`.
 
 Type the `?` in front of the function names like `?library()` in the R console to read the R documentation for it. You can do this for any function.
 
+Press the button 'Submit Answers' to go to next exercise.
+
+
+`@sample_code`
+```{r}
+# Read the R documentation on the package related functions.
+
+?library()
+
+```
 
 ***
+
 
 ```yaml
 type: NormalExercise
 lang: r
-key: c08e597ba1
+key: 
 xp: 50
 ```
 
@@ -165,10 +176,10 @@ detach(package:stringr)
 
 `@sct`
 ```{r}
-test_function("library", args = "obj1",
+test_function("library",
               not_called_msg = "Have you used the function to load the stringr package?")
 
-test_function("detach", args = "obj2",
+test_function("detach", 
               not_called_msg = "Have you used the function to unload the stringr package?")
               
 test_error()
