@@ -23,6 +23,8 @@ unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
 ```
+
+
 ***
 
 ```yaml
@@ -177,16 +179,21 @@ boxplot(ctr_data$ClaimDuration,
         main = "Boxplot of Data by Claim Duration",
         ylab = "Claim Duration"
         )
+
 boxplot(ctr_data$Exposure,
         main = "Boxplot of Data by Exposure",
         ylab = "Exposure"
         )
+
 situs_counts <- table(ctr_data$ClaimType)
+
 barplot(situs_counts,
         main = "Bar Chart of Situs Counts",
         ylab = "Counts"
         )
+
 tq_counts <- table(ctr_data$TQ_Status)
+
 barplot(tq_counts,
         main = "Bar Chart of TQ Status Counts",
         ylab = "Counts")
@@ -239,6 +246,7 @@ cred_stats <- ctr_data %>%
 
 # 1.0.13 - view the results for a judgment call on credibility
 View(cred_stats)
+
 ```
 
 
@@ -249,16 +257,21 @@ boxplot(ctr_data$ClaimDuration,
         main = "Boxplot of Data by Claim Duration",
         ylab = "Claim Duration"
         )
+
 boxplot(ctr_data$Exposure,
         main = "Boxplot of Data by Exposure",
         ylab = "Exposure"
         )
+
 situs_counts <- table(ctr_data$ClaimType)
+
 barplot(situs_counts,
         main = "Bar Chart of Situs Counts",
         ylab = "Counts"
         )
+
 tq_counts <- table(ctr_data$TQ_Status)
+
 barplot(tq_counts,
         main = "Bar Chart of TQ Status Counts",
         ylab = "Counts")
@@ -311,6 +324,7 @@ cred_stats <- ctr_data %>%
 
 # 1.0.13 - view the results for a judgment call on credibility
 View(cred_stats)
+
 ```
 
 `@sct`
@@ -340,8 +354,6 @@ unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
 ```
-***
-
 ***
 
 ```yaml
@@ -382,10 +394,6 @@ library(lubridate)
 
 # 1.0.4 - import the data
 # Datacamp session has already imported the data into a table name ctr_data
-
-# gc is garbage collector that clean random scraps from the data
-# this is important with memory intensive programs
-gc() 
 
 # 1.5.2 - Add a current date variable so we can create an out-of-time holdout
 # Assume that claims were incurred at the middle of year, and are bounded between 2000 and 2011 
@@ -449,10 +457,6 @@ library(lubridate)
 
 # 1.0.4 - import the data
 # Datacamp session has already imported the data into a table name ctr_data
-
-# gc is garbage collector that clean random scraps from the data
-# this is important with memory intensive programs
-gc() 
 
 # 1.5.2 - Add a current date variable so we can create an out-of-time holdout
 # Assume that claims were incurred at the middle of year, and are bounded between 2000 and 2011 
