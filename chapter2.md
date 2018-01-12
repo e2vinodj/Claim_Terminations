@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 
+key: d20b710ce1
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: fbe304cdea
 xp: 25
 ```
 
@@ -59,7 +59,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 46b2771299
 xp: 100
 ```
 
@@ -168,7 +168,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 9c67c46363
 xp: 100
 ```
 
@@ -354,7 +354,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: bba686c680
 lang: r
 ```
 
@@ -374,7 +374,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 1fd5ccf0cf
 xp: 100
 ```
 
@@ -533,7 +533,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 4d5c202461
 xp: 100
 ```
 
