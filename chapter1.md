@@ -74,7 +74,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: b2af03af12
 lang: r
 ```
 
@@ -94,7 +94,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 378d14b26a
 xp: 25
 ```
 
@@ -125,7 +125,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: a17f3fa7e3
 xp: 50
 ```
 
