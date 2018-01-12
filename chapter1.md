@@ -261,10 +261,8 @@ ggplot() +
 
 `@sct`
 ```{r}
-test_function("library", arg = "obj1",
-              not_called_msg = "Have you used the function to load the ggplot2 package?",
-              args_not_specified = "Have you specified the package name in the function?",
-              incorrect_msg = "Have you provided the correct package name to load ggplot2?")
+test_function("library", 
+              not_called_msg = "Have you used the function to load the ggplot2 package?")
 
 test_error()
 success_msg("Good work!")
@@ -751,7 +749,7 @@ library(dplyr)
 
 `@sct`
 ```{r}
-test_function("library",  index=2,
+test_function("library",  
               not_called_msg = "Have you used the function to load the `dplyr` package?")
 
 
