@@ -113,9 +113,9 @@ Press the button 'Submit Answers' to go to next exercise.
 
 `@sample_code`
 ```{r}
-# Read the R documentation on the package related functions.
+# list the packages loaded into session.
 
-?library()
+library()
 
 ```
 
