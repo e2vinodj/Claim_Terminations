@@ -3,7 +3,7 @@ title       : Prework2-Cox/ Poisson Modeling
 description : Cox/ Poisson Modeling.
 ---
 
-## <<<New Exercise>>>
+## Data Cleaning, Exploration and Feature Engineering
 
 ```yaml
 type: NormalExercise
@@ -12,29 +12,9 @@ lang: r
 xp: 50
 skills: 1
 ```
-
+Testing chapter 2
 
 `@instructions`
 
 `@hint`
 
-`@pre_exercise_code`
-```{r}
-
-```
-
-`@sample_code`
-```{r}
-
-```
-
-`@solution`
-```{r}
-
-```
-
-`@sct`
-```{r}
-
-```
----
