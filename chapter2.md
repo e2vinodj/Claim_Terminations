@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 637ddab9fc
+key: 
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 13e8e7b5b8
+key: 
 xp: 25
 ```
 
@@ -59,7 +59,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 ```yaml
 type: NormalExercise
 lang: r
-key: 0f191bfd35
+key: 
 xp: 100
 ```
 
@@ -168,7 +168,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 0cac021a84
+key: 
 xp: 100
 ```
 
@@ -226,7 +226,8 @@ term_stats <- ctr_data %>%
                               term_rates = SumTerminations / SumExposure
                             )
 
-View(term_stats)
+#******  Uncomment the below View() and run it to view the records in table term_stats.  ******
+#    View(term_stats)
 
 # 1.0.10 - plot the hazard rate summary, and view it for reasonability
 attach(term_stats)
@@ -260,7 +261,9 @@ cred_stats <- ctr_data %>%
                             )
 
 # 1.0.13 - view the results for a judgment call on credibility
-View(cred_stats)
+#******  Uncomment the below View() and run it.  ******
+
+#    View(cred_stats)
 
 ```
 
@@ -304,7 +307,8 @@ term_stats <- ctr_data %>%
                               term_rates = SumTerminations / SumExposure
                             )
 
-View(term_stats)
+#******  Uncomment the below View() and run it to view the records in table term_stats.  ******
+#    View(term_stats)
 
 # 1.0.10 - plot the hazard rate summary, and view it for reasonability
 attach(term_stats)
@@ -338,7 +342,9 @@ cred_stats <- ctr_data %>%
                             )
 
 # 1.0.13 - view the results for a judgment call on credibility
-View(cred_stats)
+#******  Uncomment the below View() and run it.  ******
+
+#    View(cred_stats)
 
 ```
 
@@ -354,7 +360,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 6ddb22bd5e
+key: 
 lang: r
 ```
 
@@ -374,7 +380,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: fad17e696b
+key: 
 xp: 100
 ```
 
@@ -533,7 +539,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: a219d32e63
+key: 
 xp: 100
 ```
 

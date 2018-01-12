@@ -615,7 +615,7 @@ A new data frame or a data table can be created from an existing data frame or t
 
 - Type this code below comment #2 to make a copy of the data in `ctr_data` but only for records having the Claim # 16430: ctr_data1 <- ctr_data[fake_claim_id==16430,]
 
-- Type this code below comment #3 to view the data from the new table `ctr_data1`: View(ctr_data1)
+- Type this code in the Console after running the code in comment #2 to view the data from the new table `ctr_data1`: View(ctr_data1)
  
 - Now Type the code below comment #4 to Create a new data table called 'Test_Data' from table `ctr_data` having Incurred_Year >= 2000: 
 
@@ -647,7 +647,7 @@ ctr_data[fake_claim_id==16430,]
 ctr_data1 <- ctr_data[fake_claim_id==16430,]
 
 #3 View the records the newly created `ctr_data1` dataset in tabular format (like excel)
-View(ctr_data1)
+# View(ctr_data1)
 
 #4 Create a new data table called `Test_Data` from table `ctr_data` where Incurred_Year >= 2000
 
@@ -663,7 +663,7 @@ ctr_data[fake_claim_id==16430,]
 ctr_data1 <- ctr_data[fake_claim_id==16430,]
 
 #3 View the records the newly created `ctr_data1` dataset in tabular format (like excel)
-View(ctr_data1)
+# View(ctr_data1)
 
 #4 Create a new data table called `Test_Data` from table `ctr_data` where Incurred_Year >= 2000
 Test_Data <- ctr_data[Incurred_Year >= 2000,]
