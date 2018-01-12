@@ -74,13 +74,14 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: b4869b15a1
+key: 
 lang: r
 ```
 
 `@pre_exercise_code`
 ```{r}
 library(data.table)
+library(dplyr)
 
 temp <- tempfile()
 download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
@@ -93,7 +94,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 81dcdd2149
+key: 
 xp: 25
 ```
 
@@ -124,7 +125,7 @@ Press the button 'Submit Answers' to go to next exercise.
 ```yaml
 type: NormalExercise
 lang: r
-key: 0b1a74cdec
+key: 
 xp: 50
 ```
 
