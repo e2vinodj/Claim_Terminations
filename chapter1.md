@@ -180,10 +180,8 @@ detach(package:stringr)
 test_function("library", 
               not_called_msg = "Have you used the function to load the stringr package?")
               
-test_function("detach", arg = "obj2",
-              not_called_msg = "Have you used the function to unload the stringr package?",
-              args_not_specified = "Have you specified the package name to unload?",
-              incorrect_msg = "Have you specified the correct package name to unload?")
+test_function("detach", 
+              not_called_msg = "Have you used the function to unload the stringr package?")
 
               
 test_error()
@@ -753,10 +751,8 @@ library(dplyr)
 
 `@sct`
 ```{r}
-test_function("library", arg = "pckg", index=2,
-              not_called_msg = "Have you used the function to load the `dplyr` package?",
-              args_not_specified = "Have you specified the package name - dplyr?",
-              incorrect_msg = "Have you specified the correct package name?")
+test_function("library",  index=2,
+              not_called_msg = "Have you used the function to load the `dplyr` package?")
 
 
 test_error()
@@ -1282,14 +1278,8 @@ My_List
 ```{r}
 
 #2 Populate a list with 100 uniform random numbers between 10 & 15
-test_function("runif", arg = c("n","mi","mx"),
-              not_called_msg = "Have you used runif() to generate the uniform random numbers?",
-              args_not_specified = c("Have you specified the total number of random numbers?",
-                                     "Have you specified the lower limit of the random number?",
-                                     "Have you specified the upper limit of the random number?"),
-              incorrect_msg = c("Have you specified the total number of random numbers?",
-                                "Have you specified the lower limit of the random number?",
-                               "Have you specified the upper limit of the random number?"))
+test_function("runif", 
+              not_called_msg = "Have you used runif() to generate the uniform random numbers?")
               
 test_error()
 success_msg("Good work!")
