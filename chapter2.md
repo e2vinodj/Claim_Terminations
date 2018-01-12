@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 040812d6a6
+key: 
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: c3b293c013
+key: 
 xp: 25
 ```
 
@@ -59,7 +59,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 ```yaml
 type: NormalExercise
 lang: r
-key: 43f6ad8004
+key: 
 xp: 100
 ```
 
@@ -168,7 +168,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: ede8dc870a
+key: 
 xp: 100
 ```
 
@@ -177,9 +177,12 @@ xp: 100
 
 - Now we are going to visually explore the data in the ctr_data table:  By Plotting graphs	   
 
-- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
-- Press the button 'Submit Answers' when you are ready to go to next exercise.
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
 
 
 Note: Refer the code in "0100 - Data Explore.r"
@@ -351,7 +354,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: fc59fc8535
+key: 
 lang: r
 ```
 
@@ -371,7 +374,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: '6418348368'
+key: 
 xp: 100
 ```
 
@@ -386,9 +389,11 @@ xp: 100
  	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
-- Press the button 'Submit Answers' when you are ready to go to next exercise.
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
 
 
 Note: Refer the code in "0150 - Separate data into train val test.r"
@@ -528,7 +533,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 06c3d97095
+key: 
 xp: 100
 ```
 
@@ -537,9 +542,12 @@ xp: 100
 
 - Now we are going to split the data using the insights we obtained from our previous exercises.
 
-- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
 
-- Press the button 'Submit Answers' when you are ready to go to next exercise.
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
 
 
 Note: Refer the code in "0150 - Separate data into train val test.r"
