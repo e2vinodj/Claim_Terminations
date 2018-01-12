@@ -8,7 +8,7 @@ description : Cox/ Poisson Modeling.
 
 ```yaml
 type: TabExercise
-key: 9850bfd000
+key: 
 lang: r
 ```
 
@@ -30,7 +30,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: ab167ec8aa
+key: 
 xp: 25
 ```
 
@@ -39,9 +39,14 @@ xp: 25
 	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-- Read the comments and the code. In these exercises first click on the "RUN CODE" button to run the Code and Observe the results.
+- Read the comments and the code. 
 
-- Press the button 'Submit Answers' when you are ready to go to next exercise.
+- In this chapter, - First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
 
 `@sample_code`
 ```{r}
@@ -54,7 +59,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 ```yaml
 type: NormalExercise
 lang: r
-key: 2463f22cb5
+key: 
 xp: 100
 ```
 
@@ -68,9 +73,14 @@ xp: 100
 	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-- Read the comments and the code. First click on the "RUN CODE" button to run the Code and Observe the results printed in the R-Console.
+- Read the comments and the code. 
 
-- Press the button 'Submit Answers' when you are ready to go to next exercise.
+- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small batches. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
 
 Note: Refer the code in "0100 - Data Explore.r"
 
@@ -158,7 +168,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: '6637079663'
+key: 
 xp: 100
 ```
 
@@ -341,7 +351,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 9f1688bddb
+key: 
 lang: r
 ```
 
@@ -361,7 +371,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 4d119e8fab
+key: 
 xp: 100
 ```
 
@@ -518,7 +528,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: f14a52d5f2
+key: 
 xp: 100
 ```
 
