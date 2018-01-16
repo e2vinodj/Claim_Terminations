@@ -1,6 +1,17 @@
-title            :  ILTCI 2018 PA Workshop PreWork
-description      : This is an automatically generated demo course which will help you on your way to create an awesome DataCamp course.
-university       : DataCamp
-difficulty_level : 2
-time_needed      : 1 hour
-from: "r-base-prod:29" 
+title: ILTCI 2018 PA Workshop PreWork
+description: This is an automatically generated demo course which will help you on
+  your way to create an awesome DataCamp course.
+university: DataCamp
+difficulty_level: 2
+time_needed: 1 hour
+from: r-base-prod:29
+datasets:
+  ILTCI PM workshop CTR data.zip: Iltci pm workshop ctr data
+  ctr_data.RData: Ctr data
+  ctr_data_ph.RData: Ctr data ph
+  ctr_data_ps.RData: Ctr data ps
+  ctr_data_trn.RData: Ctr data trn
+  datasamples.txt: Datasamples
+  results_ph.RData: Results ph
+  results_ps.RData: Results ps
+  results_pwe.RData: Results pwe
