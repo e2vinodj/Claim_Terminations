@@ -794,7 +794,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: 28fad40767
 lang: r
 ```
 
@@ -814,7 +814,7 @@ unlink(temp)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 29f68fbc6d
 xp: 250
 ```
 
@@ -1062,7 +1062,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 1962c80e9c
 xp: 100
 ```
 
