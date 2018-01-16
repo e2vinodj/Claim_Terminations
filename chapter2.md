@@ -794,7 +794,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 
+key: 79e508bfb4
 lang: r
 ```
 
@@ -808,7 +808,7 @@ library(dplyr)
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: 8e3394e35c
 xp: 150
 ```
 
@@ -1052,7 +1052,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 
+key: aadf47ca95
 xp: 150
 ```
 
