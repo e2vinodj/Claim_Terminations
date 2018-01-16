@@ -794,7 +794,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 28fad40767
+key: 
 lang: r
 ```
 
@@ -802,20 +802,14 @@ lang: r
 ```{r}
 library(data.table)
 library(dplyr)
-
-temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
-unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
-ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
-unlink(temp)
 ```
 ***
 
 ```yaml
 type: NormalExercise
 lang: r
-key: 29f68fbc6d
-xp: 250
+key: 
+xp: 150
 ```
 
 
@@ -846,9 +840,7 @@ library(stringr)
 library(broom)
 library(dplyr)
 
-
-# 2.0.4 - import table - produced earlier in chapter-2 (code "150 - Separate data into train val test.R")
-load("ctr_data.RData")
+# 2.0.4 - import table - The data produced earlier in chapter-2 is loaded into this session and ready for use. Table name - `ctr_data`
 
 # 2.0.5 - recode ClaimDuration as a numeric variable, which is needed in the next data manipulation step
 ctr_data$ClaimDuration.n <- as.numeric(ctr_data$ClaimDuration)
@@ -955,9 +947,7 @@ library(stringr)
 library(broom)
 library(dplyr)
 
-
-# 2.0.4 - import table - produced earlier in chapter-2 (code "150 - Separate data into train val test.R")
-load("ctr_data.RData")
+# 2.0.4 - import table - The data produced earlier in chapter-2 is loaded into this session and ready for use. Table name - `ctr_data`
 
 # 2.0.5 - recode ClaimDuration as a numeric variable, which is needed in the next data manipulation step
 ctr_data$ClaimDuration.n <- as.numeric(ctr_data$ClaimDuration)
@@ -1062,8 +1052,8 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 1962c80e9c
-xp: 100
+key: 
+xp: 150
 ```
 
 
@@ -1208,5 +1198,907 @@ success_msg("Good work!")
 ```
 
 
+---
+
+## Run a Cox proportional hazard model
+
+```yaml
+type: NormalExercise
+lang: r
+key: 3b31b843a2
+xp: 150
+```
 
 
+`@instructions`
+
+- Now let us produce and visualize Kaplan-Meier survival curves.
+
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
+
+
+Note: Refer the code in "0220 - CoxPH.R"
+
+`@pre_exercise_code`
+```{r}
+library(data.table)
+library(dplyr)
+
+```
+
+`@sample_code`
+```{r}
+##########################################################################################
+# Purpose: To be able to run a Cox proportional hazard model, and to be able to
+#             review and interpret the basic results
+##########################################################################################
+
+# 2.2.1 - load the packages
+library(survival)
+library(broom)
+library(dplyr)
+library(stringr)
+
+# 2.2.4 - the ctr_data_trn (training) table created in earlier chapters is already imported and loaded into this session.
+
+# 2.2.5 - recode the data into ctr_data_ph so it is in a cleaner format for the regression
+ctr_data_ph <- ctr_data_trn %>%
+                          select(GroupIndicator,
+                                 Gender,
+                                 IncurredAgeBucket,
+                                 Incurred_Year,
+                                 ClaimType,
+                                 Cov_Type_Bucket,
+                                 Exposure,
+                                 Terminations,
+                                 ClaimDuration,
+                                 ClaimDuration.n,
+                                 Diagnosis_Category,
+                                 TQ_Status,
+                                 Infl_Rider_Bucket,
+                                 Max_Ben_Bucket,
+                                 beg_dur_ph,
+                                 end_dur_ph,
+                                 Region,
+                                 Sample
+                                  ) %>%
+                          mutate(ClmDurBucket = case_when(.$ClaimDuration <= 3 ~ "Mos1-3",
+                                                          .$ClaimDuration > 3 & .$ClaimDuration <= 12 ~ "Mo4-12",
+                                                          .$ClaimDuration > 12 & .$ClaimDuration <= 72 ~ "Yrs2-6",
+                                                          .$ClaimDuration > 72 ~ "Yrs7+ "
+                                                          ),
+                                 Diagnosis2   = if_else(str_detect(Diagnosis_Category, "Alzheimer") | Diagnosis_Category == "Mental",
+                                                         "Mental",
+                                                         "Non-Mental"
+                                                          ),
+                                 BP2          = if_else(Max_Ben_Bucket == "Unlimited",
+                                                         "Lifetime",
+                                                         "Non-Life"
+                                                          )
+                                  ) %>%
+                          filter(ClaimType != "Unk"
+                                  ) %>%
+                          mutate(LnExposure = log(Exposure)
+                                 )
+
+# 2.2.6 - recode factor variables so that the base level characteristics can be more easily defined
+ctr_data_ph$Gender.f <- as.factor(ctr_data_ph$Gender)
+ctr_data_ph$ClaimType.f <- as.factor(ctr_data_ph$ClaimType)
+ctr_data_ph$Diagnosis2.f <- as.factor(ctr_data_ph$Diagnosis2)
+ctr_data_ph$Diagnosis_Category.f <- as.factor(ctr_data_ph$Diagnosis_Category)
+ctr_data_ph$BP2.f <- as.factor(ctr_data_ph$BP2)
+ctr_data_ph$IncurredAgeBucket.f <- as.factor(ctr_data_ph$IncurredAgeBucket)
+ctr_data_ph$ClmDurBucket.f <- as.factor(ctr_data_ph$ClmDurBucket)
+ctr_data_ph$Incurred_Year.f <- as.factor(ctr_data_ph$Incurred_Year)
+ctr_data_ph$Region.f <- as.factor(ctr_data_ph$Region)
+ctr_data_ph$TQ_Status.f <- as.factor(ctr_data_ph$TQ_Status)
+ctr_data_ph$Infl_Rider_Bucket.f <- as.factor(ctr_data_ph$Infl_Rider_Bucket)
+ctr_data_ph$Max_Ben_Bucket.f <- as.factor(ctr_data_ph$Max_Ben_Bucket)
+
+# 2.2.7 - use ph data as the prefix
+attach(ctr_data_ph)
+
+# 2.2.8 - run the Cox ph regression and explicitly state the base level characteristics
+results_ph <- coxph(formula = Surv(time = beg_dur_ph,
+                                   time2 = end_dur_ph,
+                                   event = Terminations,
+                                   type = "counting"
+                                  )
+                                  ~ relevel(Gender.f, "Female") +
+                                    relevel(IncurredAgeBucket.f,"80 to 84") +
+                                    relevel(BP2.f,"Non-Life") +
+                                    relevel(ClaimType.f,"HHC") +
+                                    relevel(Diagnosis2.f,"Non-Mental"
+                                    ),
+                                  data=ctr_data_ph,
+                                  ties = "efron"
+                                  )
+
+# 2.2.9 - detach the dataset
+detach(ctr_data_ph)
+
+# 2.2.10 - view the results - does everything look reasonable? 
+results_ph
+
+# 2.2.11 - store coefficients in data-frame with tidy() from the broom package, which
+#           cleans up the results a little, and view the results
+coef_ph <- tidy(results_ph) %>% 
+                mutate(coef_exp = exp(estimate),
+                       chisq_stat = statistic ** 2)
+
+# uncomment the below line to View the results in 'coef_ph'
+# View(coef_ph)
+
+# 2.2.12 - plot the baseline survival function - does it look as expected? remember you looked
+#             at this raw survival curve in the K-M segment earlier
+plot(survfit(results_ph,
+             newdata = data.frame(Gender.f = "Female",
+                                  IncurredAgeBucket.f = "80 to 84",
+                                  BP2.f = "Non-Life",
+                                  ClaimType.f = "HHC",
+                                  Diagnosis2.f = "Non-Mental"
+                                  )
+              ),
+              ylim=c(0,1),
+              xlab="Months",
+              ylab="Proportion not Terminated",
+              main = "Base Level Survival Curve",
+              col=c("black", "red", "blue")
+      )
+legend('topright', c("Base Level", "Lower 95%CI", "Upper 95%CI"), col=c("black", "red", "blue"), lty=1:3, cex=0.8)
+
+```
+
+
+`@solution`
+```{r}
+##########################################################################################
+# Purpose: To be able to run a Cox proportional hazard model, and to be able to
+#             review and interpret the basic results
+##########################################################################################
+
+# 2.2.1 - load the packages
+library(survival)
+library(broom)
+library(dplyr)
+library(stringr)
+
+# 2.2.4 - the ctr_data_trn (training) table created in earlier chapters is already imported and loaded into this session.
+
+# 2.2.5 - recode the data into ctr_data_ph so it is in a cleaner format for the regression
+ctr_data_ph <- ctr_data_trn %>%
+                          select(GroupIndicator,
+                                 Gender,
+                                 IncurredAgeBucket,
+                                 Incurred_Year,
+                                 ClaimType,
+                                 Cov_Type_Bucket,
+                                 Exposure,
+                                 Terminations,
+                                 ClaimDuration,
+                                 ClaimDuration.n,
+                                 Diagnosis_Category,
+                                 TQ_Status,
+                                 Infl_Rider_Bucket,
+                                 Max_Ben_Bucket,
+                                 beg_dur_ph,
+                                 end_dur_ph,
+                                 Region,
+                                 Sample
+                                  ) %>%
+                          mutate(ClmDurBucket = case_when(.$ClaimDuration <= 3 ~ "Mos1-3",
+                                                          .$ClaimDuration > 3 & .$ClaimDuration <= 12 ~ "Mo4-12",
+                                                          .$ClaimDuration > 12 & .$ClaimDuration <= 72 ~ "Yrs2-6",
+                                                          .$ClaimDuration > 72 ~ "Yrs7+ "
+                                                          ),
+                                 Diagnosis2   = if_else(str_detect(Diagnosis_Category, "Alzheimer") | Diagnosis_Category == "Mental",
+                                                         "Mental",
+                                                         "Non-Mental"
+                                                          ),
+                                 BP2          = if_else(Max_Ben_Bucket == "Unlimited",
+                                                         "Lifetime",
+                                                         "Non-Life"
+                                                          )
+                                  ) %>%
+                          filter(ClaimType != "Unk"
+                                  ) %>%
+                          mutate(LnExposure = log(Exposure)
+                                 )
+
+# 2.2.6 - recode factor variables so that the base level characteristics can be more easily defined
+ctr_data_ph$Gender.f <- as.factor(ctr_data_ph$Gender)
+ctr_data_ph$ClaimType.f <- as.factor(ctr_data_ph$ClaimType)
+ctr_data_ph$Diagnosis2.f <- as.factor(ctr_data_ph$Diagnosis2)
+ctr_data_ph$Diagnosis_Category.f <- as.factor(ctr_data_ph$Diagnosis_Category)
+ctr_data_ph$BP2.f <- as.factor(ctr_data_ph$BP2)
+ctr_data_ph$IncurredAgeBucket.f <- as.factor(ctr_data_ph$IncurredAgeBucket)
+ctr_data_ph$ClmDurBucket.f <- as.factor(ctr_data_ph$ClmDurBucket)
+ctr_data_ph$Incurred_Year.f <- as.factor(ctr_data_ph$Incurred_Year)
+ctr_data_ph$Region.f <- as.factor(ctr_data_ph$Region)
+ctr_data_ph$TQ_Status.f <- as.factor(ctr_data_ph$TQ_Status)
+ctr_data_ph$Infl_Rider_Bucket.f <- as.factor(ctr_data_ph$Infl_Rider_Bucket)
+ctr_data_ph$Max_Ben_Bucket.f <- as.factor(ctr_data_ph$Max_Ben_Bucket)
+
+# 2.2.7 - use ph data as the prefix
+attach(ctr_data_ph)
+
+# 2.2.8 - run the Cox ph regression and explicitly state the base level characteristics
+results_ph <- coxph(formula = Surv(time = beg_dur_ph,
+                                   time2 = end_dur_ph,
+                                   event = Terminations,
+                                   type = "counting"
+                                  )
+                                  ~ relevel(Gender.f, "Female") +
+                                    relevel(IncurredAgeBucket.f,"80 to 84") +
+                                    relevel(BP2.f,"Non-Life") +
+                                    relevel(ClaimType.f,"HHC") +
+                                    relevel(Diagnosis2.f,"Non-Mental"
+                                    ),
+                                  data=ctr_data_ph,
+                                  ties = "efron"
+                                  )
+
+# 2.2.9 - detach the dataset
+detach(ctr_data_ph)
+
+# 2.2.10 - view the results - does everything look reasonable? 
+results_ph
+
+# 2.2.11 - store coefficients in data-frame with tidy() from the broom package, which
+#           cleans up the results a little, and view the results
+coef_ph <- tidy(results_ph) %>% 
+                mutate(coef_exp = exp(estimate),
+                       chisq_stat = statistic ** 2)
+
+# uncomment the below line to View the results in 'coef_ph'
+# View(coef_ph)
+
+# 2.2.12 - plot the baseline survival function - does it look as expected? remember you looked
+#             at this raw survival curve in the K-M segment earlier
+plot(survfit(results_ph,
+             newdata = data.frame(Gender.f = "Female",
+                                  IncurredAgeBucket.f = "80 to 84",
+                                  BP2.f = "Non-Life",
+                                  ClaimType.f = "HHC",
+                                  Diagnosis2.f = "Non-Mental"
+                                  )
+              ),
+              ylim=c(0,1),
+              xlab="Months",
+              ylab="Proportion not Terminated",
+              main = "Base Level Survival Curve",
+              col=c("black", "red", "blue")
+      )
+legend('topright', c("Base Level", "Lower 95%CI", "Upper 95%CI"), col=c("black", "red", "blue"), lty=1:3, cex=0.8)
+
+```
+
+`@sct`
+```{r}
+success_msg("Good work!")
+```
+
+
+---
+
+## Run a piece-wise Cox proportional hazard model
+
+```yaml
+type: NormalExercise
+lang: r
+key: 71ef64d31b
+xp: 150
+```
+
+
+`@instructions`
+
+- Now run a piece-wise Cox proportional hazard model, to be able to review and interpret the basic results, and to show how it is equivalent to a Poisson GLM.
+
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
+
+
+Note: Refer the code in "0230 - PweCoxPH.R"
+
+`@pre_exercise_code`
+```{r}
+library(data.table)
+library(dplyr)
+
+```
+
+`@sample_code`
+```{r}
+##########################################################################################
+# Purpose: To be able to run a piece-wise Cox proportional hazard model, to be able to
+#             review and interpret the basic results, and to show how it is equivalent
+#             to a Poisson GLM
+##########################################################################################
+
+# 2.3.1 - load the packages
+library(eha)
+
+# 2.3.4 - the ctr_data_ph table from the earlier exercise is imported and loaded into this session
+
+# 2.3.5 - use ph data as the prefix
+attach(ctr_data_ph)
+
+# 2.3.6 - run the Cox piece-wise regression, it takes about a minute to run
+#           note the cutpoints
+results_pwe <- phreg(formula = Surv(time = beg_dur_ph,
+                                   time2 = end_dur_ph,
+                                   event = Terminations,
+                                   type = "counting"
+                                  )
+                                  ~ relevel(Gender.f, "Female") +
+                                    relevel(IncurredAgeBucket.f,"80 to 84") +
+                                    relevel(BP2.f,"Non-Life") +
+                                    relevel(ClaimType.f,"HHC") +
+                                    relevel(Diagnosis2.f,"Non-Mental"
+                                    ),
+                                  data=ctr_data_ph,
+                                  dist="pch",
+                                  cut = c(3, 12, 72) # Cutpoints to approximate survival curve
+                                  )
+
+# 2.3.7 - detach the dataset
+detach(ctr_data_ph)
+
+# 2.3.8 - view the results - do they look reasonable?
+results_pwe
+
+plot(results_pwe)
+results_pwe$hazards
+
+# 2.3.9 - store coefficients in data-frame with tidy() from the broom package
+#           this cleans up the formatting a little better
+coef_pwe <- tidy(results_pwe$coefficients)
+
+# uncomment the below line and run the code to view - coef_pwe
+# View(coef_pwe)
+
+# 2.3.10 - compute the Poisson glm with reduced factors and review results
+#            we're jumping ahead a tiny bit on the variable selection so that
+#            we can dig into the Poisson GLM after this segment
+results_ps <- glm(Terminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3"),
+                  data = ctr_data_ph, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.3.11 - to compare to phreg results, we need to exponentiate the Poisson parameters 
+coef_ps_clmdur <- exp(results_ps$coefficients[1])
+coef_ps_clmdur[2] <- exp(results_ps$coefficients[1]+results_ps$coefficients[14])
+coef_ps_clmdur[3] <- exp(results_ps$coefficients[1]+results_ps$coefficients[15])
+coef_ps_clmdur[4] <- exp(results_ps$coefficients[1]+results_ps$coefficients[16])
+
+# 2.3.12 - show claim duration equivalence - are they the same?
+results_pwe$hazards
+coef_ps_clmdur
+
+# 2.3.13 - show coefficient equivalence - are they the same?
+coef_pwe
+
+```
+
+
+`@solution`
+```{r}
+##########################################################################################
+# Purpose: To be able to run a piece-wise Cox proportional hazard model, to be able to
+#             review and interpret the basic results, and to show how it is equivalent
+#             to a Poisson GLM
+##########################################################################################
+
+# 2.3.1 - load the packages
+library(eha)
+
+# 2.3.4 - the ctr_data_ph table from the earlier exercise is imported and loaded into this session
+
+# 2.3.5 - use ph data as the prefix
+attach(ctr_data_ph)
+
+# 2.3.6 - run the Cox piece-wise regression, it takes about a minute to run
+#           note the cutpoints
+results_pwe <- phreg(formula = Surv(time = beg_dur_ph,
+                                   time2 = end_dur_ph,
+                                   event = Terminations,
+                                   type = "counting"
+                                  )
+                                  ~ relevel(Gender.f, "Female") +
+                                    relevel(IncurredAgeBucket.f,"80 to 84") +
+                                    relevel(BP2.f,"Non-Life") +
+                                    relevel(ClaimType.f,"HHC") +
+                                    relevel(Diagnosis2.f,"Non-Mental"
+                                    ),
+                                  data=ctr_data_ph,
+                                  dist="pch",
+                                  cut = c(3, 12, 72) # Cutpoints to approximate survival curve
+                                  )
+
+# 2.3.7 - detach the dataset
+detach(ctr_data_ph)
+
+# 2.3.8 - view the results - do they look reasonable?
+results_pwe
+
+plot(results_pwe)
+results_pwe$hazards
+
+# 2.3.9 - store coefficients in data-frame with tidy() from the broom package
+#           this cleans up the formatting a little better
+coef_pwe <- tidy(results_pwe$coefficients)
+
+# uncomment the below line and run the code to view - coef_pwe
+# View(coef_pwe)
+
+# 2.3.10 - compute the Poisson glm with reduced factors and review results
+#            we're jumping ahead a tiny bit on the variable selection so that
+#            we can dig into the Poisson GLM after this segment
+results_ps <- glm(Terminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3"),
+                  data = ctr_data_ph, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.3.11 - to compare to phreg results, we need to exponentiate the Poisson parameters 
+coef_ps_clmdur <- exp(results_ps$coefficients[1])
+coef_ps_clmdur[2] <- exp(results_ps$coefficients[1]+results_ps$coefficients[14])
+coef_ps_clmdur[3] <- exp(results_ps$coefficients[1]+results_ps$coefficients[15])
+coef_ps_clmdur[4] <- exp(results_ps$coefficients[1]+results_ps$coefficients[16])
+
+# 2.3.12 - show claim duration equivalence - are they the same?
+results_pwe$hazards
+coef_ps_clmdur
+
+# 2.3.13 - show coefficient equivalence - are they the same?
+coef_pwe
+
+```
+
+`@sct`
+```{r}
+success_msg("Good work!")
+```
+
+
+---
+
+## A Poisson GLM model
+
+```yaml
+type: NormalExercise
+lang: r
+key: a52003da2a
+xp: 150
+```
+
+
+`@instructions`
+
+- Now let us run a Poisson GLM and explore the data a little more, to review and interpret the basic results, and to understand the model's shortcomings
+
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
+
+
+Note: Refer the code in "0240 - PoissonGLM Explore.r"
+
+`@pre_exercise_code`
+```{r}
+library(data.table)
+library(dplyr)
+
+```
+
+`@sample_code`
+```{r}
+######################################################################################################
+# Purpose: To be able to run a Poisson GLM and explore the data a little more, to be able
+#               to review and interpret the basic results, and to understand the model's shortcomings
+######################################################################################################
+
+# 2.4.1 - load the packages
+library(dplyr)
+library(stringr)
+library(broom)
+
+# 2.4.4 - the ctr_data_ph table from previous exercise is loaded into this session
+
+#convert ctr_data_ph to a tbl_df format for easier viewing
+ctr_data_ph <- tbl_df(ctr_data_ph)
+
+# 2.4.5 - view the data structure
+str(ctr_data_ph)
+
+# 2.4.6 - aggregate the ph data into ctr_data_ps; this wil speed up the regression significantly,
+#           since there are fewer records in the consolidated data
+ctr_data_ps <- ctr_data_ph %>%
+                          group_by(Cov_Type_Bucket,
+                                   Gender.f, 
+                                   IncurredAgeBucket.f, 
+                                   Incurred_Year, 
+                                   Incurred_Year.f,
+                                   ClaimType.f,
+                                   ClmDurBucket.f,
+                                   Diagnosis2.f,
+                                   BP2.f,
+                                   Sample,
+                                   Diagnosis_Category.f, 
+                                   TQ_Status.f,          
+                                   Infl_Rider_Bucket.f,  
+                                   Max_Ben_Bucket.f,     
+                                   Region.f        
+                                   ) %>%
+                          summarise(SumExposure = sum(Exposure), 
+                                    SumTerminations = sum(Terminations)
+                                    ) %>% data.frame
+
+# 2.4.7 - re-calc the lnexposure column, and a new incurred year variable
+#           this needs to be done because these drivers are not additive
+ctr_data_ps <- mutate(ctr_data_ps, 
+                    LnExposure = log(SumExposure), 
+                    LnIncYr = log(Incurred_Year - 1990)
+                    )
+
+# 2.4.8 - attach the table name
+attach(ctr_data_ps)
+
+# 2.4.9 - compute a preliminary poisson glm and review results
+#           which variables would you keep?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f,"Female")
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3")
+                  + relevel(Region.f, "West") +
+                  + relevel(Diagnosis_Category.f, "Unknown") +
+                  + relevel(TQ_Status.f, "U") +
+                  + relevel(Infl_Rider_Bucket.f, "Unknown") +
+                  + relevel(Max_Ben_Bucket.f, "Unlimited"),
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+coef_ps <- tidy(results_ps) %>% 
+                        mutate(coef_exp = exp(estimate),
+                               chisq_stat = statistic ** 2)
+
+summary(results_ps)
+
+# 2.4.10 - re-aggregate the data with reduced factors into ctr_data_ps
+#           we removed some variables, so we can even further consolidate
+#           the data for quicker downstream processing
+ctr_data_ps <- ctr_data_ps %>%
+                        select(Cov_Type_Bucket,
+                               Gender.f, 
+                               IncurredAgeBucket.f, 
+                               Incurred_Year,
+                               Incurred_Year.f,
+                               ClaimType.f, 
+                               ClmDurBucket.f, 
+                               Diagnosis2.f, 
+                               BP2.f,
+                               Sample,
+                               SumExposure,
+                               SumTerminations
+                              ) %>%
+                        group_by(Cov_Type_Bucket,
+                                 Gender.f, 
+                                 IncurredAgeBucket.f, 
+                                 Incurred_Year,
+                                 Incurred_Year.f,
+                                 ClaimType.f, 
+                                 ClmDurBucket.f,
+                                 Diagnosis2.f, 
+                                 BP2.f,
+                                 Sample
+                                ) %>%
+                        summarise(SumExposure = sum(SumExposure), 
+                                  SumTerminations = sum(SumTerminations)
+                                  ) %>% data.frame
+
+# 2.4.11 - re-calc the lnexposure column, and a new incurred year variable (non-additive)
+ctr_data_ps <- mutate(ctr_data_ps, 
+                      LnExposure = log(SumExposure), 
+                      LnIncYr = log(Incurred_Year - 1990)
+                      ) %>% data.frame()
+
+# 2.4.12 - compute the poisson glm with incurred year and review results
+#           what should we do with the incurred year variable?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3")
+                  + relevel(Incurred_Year.f,"2009"),
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.4.13 - compute the poisson glm with fitted incurred year and review results
+#           how did we do on the incurred year variable?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3")
+                  + LnIncYr,
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.4.14 - review the parameter correlation matrix; should we think about adding
+#           some cross-terms as a result of this review?
+corresult <- summary(results_ps,
+                     correlation = TRUE
+                     )
+corrmat <- corresult$correlation
+
+# **** uncomment the below line to view corrmat ****
+# View(corrmat)
+
+# 2.4.15 - run the final model with interactions and review results
+#           are the new interaction terms worth keeping?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + LnIncYr * relevel(IncurredAgeBucket.f,"80 to 84")
+                  + LnIncYr * relevel(ClmDurBucket.f,"Mos1-3"),
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.4.16 - display the dispersion parameter - this is always "1" for a regular Poisson
+#           we will be relaxing this parameter a little later
+summary.glm(results_ps)$dispersion
+
+# 2.4.17 - Type I analysis, which tells you the sequential explanatory impact of
+#         adding the driver variables - order matters!
+anova(results_ps)
+
+# 2.4.18 - Type III analysis, which tells you the explanatory impact of removing each variable (one at a time)
+#         while keeping all the others - order does not matter
+drop1(results_ps,~.,test="Chisq")
+
+```
+
+
+`@solution`
+```{r}
+######################################################################################################
+# Purpose: To be able to run a Poisson GLM and explore the data a little more, to be able
+#          to review and interpret the basic results, and to understand the model's shortcomings
+######################################################################################################
+
+# 2.4.1 - load the packages
+library(dplyr)
+library(stringr)
+library(broom)
+
+# 2.4.4 - the ctr_data_ph table from previous exercise is loaded into this session
+
+#convert ctr_data_ph to a tbl_df format for easier viewing
+ctr_data_ph <- tbl_df(ctr_data_ph)
+
+# 2.4.5 - view the data structure
+str(ctr_data_ph)
+
+# 2.4.6 - aggregate the ph data into ctr_data_ps; this wil speed up the regression significantly,
+#           since there are fewer records in the consolidated data
+ctr_data_ps <- ctr_data_ph %>%
+                          group_by(Cov_Type_Bucket,
+                                   Gender.f, 
+                                   IncurredAgeBucket.f, 
+                                   Incurred_Year, 
+                                   Incurred_Year.f,
+                                   ClaimType.f,
+                                   ClmDurBucket.f,
+                                   Diagnosis2.f,
+                                   BP2.f,
+                                   Sample,
+                                   Diagnosis_Category.f, 
+                                   TQ_Status.f,          
+                                   Infl_Rider_Bucket.f,  
+                                   Max_Ben_Bucket.f,     
+                                   Region.f        
+                                   ) %>%
+                          summarise(SumExposure = sum(Exposure), 
+                                    SumTerminations = sum(Terminations)
+                                    ) %>% data.frame
+
+# 2.4.7 - re-calc the lnexposure column, and a new incurred year variable
+#           this needs to be done because these drivers are not additive
+ctr_data_ps <- mutate(ctr_data_ps, 
+                    LnExposure = log(SumExposure), 
+                    LnIncYr = log(Incurred_Year - 1990)
+                    )
+
+# 2.4.8 - attach the table name
+attach(ctr_data_ps)
+
+# 2.4.9 - compute a preliminary poisson glm and review results
+#           which variables would you keep?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f,"Female")
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3")
+                  + relevel(Region.f, "West") +
+                  + relevel(Diagnosis_Category.f, "Unknown") +
+                  + relevel(TQ_Status.f, "U") +
+                  + relevel(Infl_Rider_Bucket.f, "Unknown") +
+                  + relevel(Max_Ben_Bucket.f, "Unlimited"),
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+coef_ps <- tidy(results_ps) %>% 
+                        mutate(coef_exp = exp(estimate),
+                               chisq_stat = statistic ** 2)
+
+summary(results_ps)
+
+# 2.4.10 - re-aggregate the data with reduced factors into ctr_data_ps
+#           we removed some variables, so we can even further consolidate
+#           the data for quicker downstream processing
+ctr_data_ps <- ctr_data_ps %>%
+                        select(Cov_Type_Bucket,
+                               Gender.f, 
+                               IncurredAgeBucket.f, 
+                               Incurred_Year,
+                               Incurred_Year.f,
+                               ClaimType.f, 
+                               ClmDurBucket.f, 
+                               Diagnosis2.f, 
+                               BP2.f,
+                               Sample,
+                               SumExposure,
+                               SumTerminations
+                              ) %>%
+                        group_by(Cov_Type_Bucket,
+                                 Gender.f, 
+                                 IncurredAgeBucket.f, 
+                                 Incurred_Year,
+                                 Incurred_Year.f,
+                                 ClaimType.f, 
+                                 ClmDurBucket.f,
+                                 Diagnosis2.f, 
+                                 BP2.f,
+                                 Sample
+                                ) %>%
+                        summarise(SumExposure = sum(SumExposure), 
+                                  SumTerminations = sum(SumTerminations)
+                                  ) %>% data.frame
+
+# 2.4.11 - re-calc the lnexposure column, and a new incurred year variable (non-additive)
+ctr_data_ps <- mutate(ctr_data_ps, 
+                      LnExposure = log(SumExposure), 
+                      LnIncYr = log(Incurred_Year - 1990)
+                      ) %>% data.frame()
+
+# 2.4.12 - compute the poisson glm with incurred year and review results
+#           what should we do with the incurred year variable?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3")
+                  + relevel(Incurred_Year.f,"2009"),
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.4.13 - compute the poisson glm with fitted incurred year and review results
+#           how did we do on the incurred year variable?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + relevel(IncurredAgeBucket.f,"80 to 84")
+                  + relevel(ClmDurBucket.f,"Mos1-3")
+                  + LnIncYr,
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.4.14 - review the parameter correlation matrix; should we think about adding
+#           some cross-terms as a result of this review?
+corresult <- summary(results_ps,
+                     correlation = TRUE
+                     )
+corrmat <- corresult$correlation
+
+# **** uncomment the below line to view corrmat ****
+# View(corrmat)
+
+# 2.4.15 - run the final model with interactions and review results
+#           are the new interaction terms worth keeping?
+results_ps <- glm(SumTerminations ~ 
+                    relevel(Gender.f, "Female") 
+                  + relevel(ClaimType.f,"HHC")
+                  + relevel(Diagnosis2.f,"Non-Mental")
+                  + relevel(BP2.f,"Non-Life")
+                  + LnIncYr * relevel(IncurredAgeBucket.f,"80 to 84")
+                  + LnIncYr * relevel(ClmDurBucket.f,"Mos1-3"),
+                  data = ctr_data_ps, 
+                  family = poisson, 
+                  offset = LnExposure
+                  )
+
+summary(results_ps)
+
+# 2.4.16 - display the dispersion parameter - this is always "1" for a regular Poisson
+#           we will be relaxing this parameter a little later
+summary.glm(results_ps)$dispersion
+
+# 2.4.17 - Type I analysis, which tells you the sequential explanatory impact of
+#         adding the driver variables - order matters!
+anova(results_ps)
+
+# 2.4.18 - Type III analysis, which tells you the explanatory impact of removing each variable (one at a time)
+#         while keeping all the others - order does not matter
+drop1(results_ps,~.,test="Chisq")
+
+```
+
+`@sct`
+```{r}
+success_msg("Good work!")
+```
