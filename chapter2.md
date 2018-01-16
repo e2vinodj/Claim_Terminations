@@ -48,6 +48,7 @@ Type the `?` in front of the function name like `?library()` in the R console to
 - Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
 
 
+
 `@sample_code`
 ```{r}
 # Read the R documentation on the package related functions.
@@ -1517,8 +1518,6 @@ xp: 150
 
 - First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
-- Feel free to type R codes in the Console to test or perform other tasks.
-
 - Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
 
 
@@ -1728,8 +1727,6 @@ xp: 150
 - The ctr_data_ph table from previous exercise is loaded into this session.
 
 - First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
-
-- Feel free to type R codes in the Console to test or perform other tasks.
 
 - Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
 
@@ -1943,7 +1940,7 @@ drop1(results_ps,~.,test="Chisq")
 ```{r}
 ######################################################################################################
 # Purpose: To be able to run a Poisson GLM and explore the data a little more, to be able
-#          to review and interpret the basic results, and to understand the model's shortcomings
+#               to review and interpret the basic results, and to understand the model's shortcomings
 ######################################################################################################
 
 # 2.4.1 - load the packages

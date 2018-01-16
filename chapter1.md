@@ -17,7 +17,7 @@ We strongly encourage you to take other R courses for indepth knowledge.
 
 
 `@instructions`
-Reminder:
+Reminder
 In the window "script.R" you should type R code to solve the exercises. When you hit the 'Submit Answer' button, every line of code is interpreted and executed by R and you will get a message whether or not your code was correct. The output of your R code is shown in the console in the lower right corner. You can hit the 'Hint' button for hints.
 
 You can also execute R commands straight in the console. This is a good way to experiment with the R code, as your submission is not checked for correctness.
