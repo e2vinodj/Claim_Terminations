@@ -794,7 +794,7 @@ success_msg("Good work!")
 
 ```yaml
 type: TabExercise
-key: 79e508bfb4
+key: 
 lang: r
 ```
 
@@ -802,13 +802,20 @@ lang: r
 ```{r}
 library(data.table)
 library(dplyr)
+
+temp <- tempfile()
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ctr_data.RData", temp)
+unzip(temp,"ctr_data.RData",overwrite=TRUE)
+load("ctr_data.RData")
+unlink(temp)
+
 ```
 ***
 
 ```yaml
 type: NormalExercise
 lang: r
-key: 8e3394e35c
+key: 
 xp: 150
 ```
 
@@ -1052,7 +1059,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: aadf47ca95
+key: 
 xp: 150
 ```
 
@@ -1205,14 +1212,14 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 3b31b843a2
+key: ff7dc84def
 xp: 150
 ```
 
 
 `@instructions`
 
-- Now let us produce and visualize Kaplan-Meier survival curves.
+- Now let us produce and visualize Kaplan-Meier survival curves. The ctr_data_trn (training) table created in earlier exercise is imported and loaded into this session.
 
 - First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
@@ -1229,6 +1236,12 @@ Note: Refer the code in "0220 - CoxPH.R"
 library(data.table)
 library(dplyr)
 
+temp <- tempfile()
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ctr_data_trn.RData", temp)
+unzip(temp,"ctr_data_trn.RData",overwrite=TRUE)
+load("ctr_data_trn.RData")
+unlink(temp)
+
 ```
 
 `@sample_code`
@@ -1244,7 +1257,7 @@ library(broom)
 library(dplyr)
 library(stringr)
 
-# 2.2.4 - the ctr_data_trn (training) table created in earlier chapters is already imported and loaded into this session.
+# 2.2.4 - the ctr_data_trn (training) table created in earlier exercise is already imported and loaded into this session.
 
 # 2.2.5 - recode the data into ctr_data_ph so it is in a cleaner format for the regression
 ctr_data_ph <- ctr_data_trn %>%
@@ -1368,7 +1381,7 @@ library(broom)
 library(dplyr)
 library(stringr)
 
-# 2.2.4 - the ctr_data_trn (training) table created in earlier chapters is already imported and loaded into this session.
+# 2.2.4 - the ctr_data_trn (training) table created in earlier exercise is already imported and loaded into this session.
 
 # 2.2.5 - recode the data into ctr_data_ph so it is in a cleaner format for the regression
 ctr_data_ph <- ctr_data_trn %>%
@@ -1491,7 +1504,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: 71ef64d31b
+key: d5c96a8e76
 xp: 150
 ```
 
@@ -1499,6 +1512,8 @@ xp: 150
 `@instructions`
 
 - Now run a piece-wise Cox proportional hazard model, to be able to review and interpret the basic results, and to show how it is equivalent to a Poisson GLM.
+
+- The ctr_data_ph table from the earlier exercise is imported and loaded into this session.
 
 - First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
@@ -1514,6 +1529,12 @@ Note: Refer the code in "0230 - PweCoxPH.R"
 ```{r}
 library(data.table)
 library(dplyr)
+
+temp <- tempfile()
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ctr_data_ph.RData", temp)
+unzip(temp,"ctr_data_ph.RData",overwrite=TRUE)
+load("ctr_data_ph.RData")
+unlink(temp)
 
 ```
 
@@ -1695,7 +1716,7 @@ success_msg("Good work!")
 ```yaml
 type: NormalExercise
 lang: r
-key: a52003da2a
+key: a25503af4c
 xp: 150
 ```
 
@@ -1703,6 +1724,8 @@ xp: 150
 `@instructions`
 
 - Now let us run a Poisson GLM and explore the data a little more, to review and interpret the basic results, and to understand the model's shortcomings
+
+- The ctr_data_ph table from previous exercise is loaded into this session.
 
 - First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
@@ -1718,6 +1741,12 @@ Note: Refer the code in "0240 - PoissonGLM Explore.r"
 ```{r}
 library(data.table)
 library(dplyr)
+
+temp <- tempfile()
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ctr_data_ph.RData", temp)
+unzip(temp,"ctr_data_ph.RData",overwrite=TRUE)
+load("ctr_data_ph.RData")
+unlink(temp)
 
 ```
 
