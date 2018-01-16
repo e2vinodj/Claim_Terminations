@@ -177,7 +177,7 @@ xp: 100
 
 - Now we are going to visually explore the data in the ctr_data table:  By Plotting graphs	   
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -395,7 +395,7 @@ xp: 100
  	   
 Type the `?` in front of the function name like `?library()` in the R console to read the R documentation. You can do this for any function.
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -548,7 +548,7 @@ xp: 100
 
 - Now we are going to split the data using the insights we obtained from our previous exercises.
 
-- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
 
 - Feel free to type R codes in the Console to test or perform other tasks.
 
@@ -785,3 +785,428 @@ ggplotly(ggplot() +
 ```{r}
 success_msg("Good work!")
 ```
+
+
+
+---
+
+## Visualize Kaplan-Meier Survival curves and Create Nelson-Aalen views
+
+```yaml
+type: TabExercise
+key: 
+lang: r
+```
+
+`@pre_exercise_code`
+```{r}
+library(data.table)
+library(dplyr)
+
+temp <- tempfile()
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
+ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
+unlink(temp)
+```
+***
+
+```yaml
+type: NormalExercise
+lang: r
+key: 
+xp: 250
+```
+
+
+`@instructions`
+
+- Now let us produce and visualize Kaplan-Meier survival curves.
+
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
+
+
+Note: Refer the code in "0200 - KM-NA.r"
+
+`@sample_code`
+```{r}
+##########################################################################################
+# Purpose: To be able to produce and visualize Kaplan-Meier survival curves
+#             and to produce simplified Nelson-Aalen test views
+##########################################################################################
+
+# 2.0.1 - load the packages
+library(survival)
+library(stringr)
+library(broom)
+library(dplyr)
+
+
+# 2.0.4 - import table - produced earlier in chapter-2 (code "150 - Separate data into train val test.R")
+load("ctr_data.RData")
+
+# 2.0.5 - recode ClaimDuration as a numeric variable, which is needed in the next data manipulation step
+ctr_data$ClaimDuration.n <- as.numeric(ctr_data$ClaimDuration)
+
+# 2.0.6 - format beginning and end times for use in K-M analysis, and for later use in the Cox regression
+ctr_data_trn <- ctr_data %>%
+                        mutate(beg_dur_ph = case_when(.$start_duration == .$end_duration ~
+                                                        .$ClaimDuration.n - 1,
+                                                      .$ClaimDuration == .$start_duration ~
+                                                        .$ClaimDuration.n - .$Exposure,
+                                                      .$ClaimDuration == .$end_duration ~
+                                                        .$ClaimDuration.n - 1,
+                                                      (.$ClaimDuration > .$start_duration) & (.$ClaimDuration < .$end_duration) ~
+                                                        .$ClaimDuration.n - 1
+                                                      ),
+                                end_dur_ph = beg_dur_ph + .$Exposure
+                               ) %>%
+                        filter(GroupIndicator == "Ind",
+                               Cov_Type_Bucket == "Comprehensive",
+                               Sample == "training"
+                              )
+
+# 2.0.7 - filter the survival data to include only females for base level characteristics,
+#         and another set to include both genders
+ctr_data_trn_f <- ctr_data_trn %>%
+                        filter(Gender == "Female",
+                               IncurredAgeBucket == "80 to 84",
+                               Max_Ben_Bucket != "Unlimited",
+                               ClaimType == "HHC",
+                               Diagnosis_Category != (str_detect(Diagnosis_Category, "Alzheimer") | Diagnosis_Category == "Mental")
+                               )
+
+ctr_data_trn_b <- ctr_data_trn %>%
+                        filter(IncurredAgeBucket == "80 to 84",
+                               Max_Ben_Bucket != "Unlimited",
+                               ClaimType == "HHC",
+                               Diagnosis_Category != (str_detect(Diagnosis_Category, "Alzheimer") | Diagnosis_Category == "Mental")
+                               )
+
+# 2.0.8 - use ctr_data_trn_f as the prefix for the next step
+attach(ctr_data_trn_f)
+
+# 2.0.9 - create a survival object for the female gender, which is needed to produce the K-M curve later
+surv_object_f <- Surv(time = beg_dur_ph,
+                      time2 = end_dur_ph,
+                      event = Terminations,
+                      type = "counting"
+                      )
+
+# 2.0.10 - remove association
+detach(ctr_data_trn_f)
+
+# 2.0.11 - use ctr_data_trn_b as the prefix for the two gender view
+attach(ctr_data_trn_b)
+
+# 2.0.12 - create survival object for both genders, which is needed to produce the K-M curves later
+surv_object_b <- Surv(time = beg_dur_ph,
+                      time2 = end_dur_ph,
+                      event = Terminations,
+                      type = "counting"
+                      )
+
+# 2.0.13 - remove association
+detach(ctr_data_trn_b)
+
+# 2.0.14 - calculate the K-M curves with the prior survival objects
+surv_fit_f <- survfit(surv_object_f ~ 1
+                      )
+
+surv_fit_b <- survfit(surv_object_b ~ Gender,
+                      data = ctr_data_trn_b
+                      )
+
+# 2.0.15 - plot the K-M survival curve, female only, then both males and females - are they reasonable?
+plot(surv_fit_f,
+        ylim=c(0,1),
+        xlab="Months",
+        ylab="Proportion not Terminated",
+        col=c("black", "red", "blue")
+     )
+legend('topright', c("Females", "Lower 95%CI", "Upper 95%CI"), col=c("black", "red", "blue"), lty=1:3, cex=0.8)
+
+plot(surv_fit_b,
+       ylim=c(0,1),
+       xlab="Months",
+       ylab="Proportion not Terminated",
+       col=c("red", "blue")
+     )
+legend('topright', c("Females", "Males"), col=c("red", "blue"), lty=1:3, cex=0.8)
+
+```
+
+
+`@solution`
+```{r}
+##########################################################################################
+# Purpose: To be able to produce and visualize Kaplan-Meier survival curves
+#             and to produce simplified Nelson-Aalen test views
+##########################################################################################
+
+# 2.0.1 - load the packages
+library(survival)
+library(stringr)
+library(broom)
+library(dplyr)
+
+
+# 2.0.4 - import table - produced earlier in chapter-2 (code "150 - Separate data into train val test.R")
+load("ctr_data.RData")
+
+# 2.0.5 - recode ClaimDuration as a numeric variable, which is needed in the next data manipulation step
+ctr_data$ClaimDuration.n <- as.numeric(ctr_data$ClaimDuration)
+
+# 2.0.6 - format beginning and end times for use in K-M analysis, and for later use in the Cox regression
+ctr_data_trn <- ctr_data %>%
+                        mutate(beg_dur_ph = case_when(.$start_duration == .$end_duration ~
+                                                        .$ClaimDuration.n - 1,
+                                                      .$ClaimDuration == .$start_duration ~
+                                                        .$ClaimDuration.n - .$Exposure,
+                                                      .$ClaimDuration == .$end_duration ~
+                                                        .$ClaimDuration.n - 1,
+                                                      (.$ClaimDuration > .$start_duration) & (.$ClaimDuration < .$end_duration) ~
+                                                        .$ClaimDuration.n - 1
+                                                      ),
+                                end_dur_ph = beg_dur_ph + .$Exposure
+                               ) %>%
+                        filter(GroupIndicator == "Ind",
+                               Cov_Type_Bucket == "Comprehensive",
+                               Sample == "training"
+                              )
+
+# 2.0.7 - filter the survival data to include only females for base level characteristics,
+#         and another set to include both genders
+ctr_data_trn_f <- ctr_data_trn %>%
+                        filter(Gender == "Female",
+                               IncurredAgeBucket == "80 to 84",
+                               Max_Ben_Bucket != "Unlimited",
+                               ClaimType == "HHC",
+                               Diagnosis_Category != (str_detect(Diagnosis_Category, "Alzheimer") | Diagnosis_Category == "Mental")
+                               )
+
+ctr_data_trn_b <- ctr_data_trn %>%
+                        filter(IncurredAgeBucket == "80 to 84",
+                               Max_Ben_Bucket != "Unlimited",
+                               ClaimType == "HHC",
+                               Diagnosis_Category != (str_detect(Diagnosis_Category, "Alzheimer") | Diagnosis_Category == "Mental")
+                               )
+
+# 2.0.8 - use ctr_data_trn_f as the prefix for the next step
+attach(ctr_data_trn_f)
+
+# 2.0.9 - create a survival object for the female gender, which is needed to produce the K-M curve later
+surv_object_f <- Surv(time = beg_dur_ph,
+                      time2 = end_dur_ph,
+                      event = Terminations,
+                      type = "counting"
+                      )
+
+# 2.0.10 - remove association
+detach(ctr_data_trn_f)
+
+# 2.0.11 - use ctr_data_trn_b as the prefix for the two gender view
+attach(ctr_data_trn_b)
+
+# 2.0.12 - create survival object for both genders, which is needed to produce the K-M curves later
+surv_object_b <- Surv(time = beg_dur_ph,
+                      time2 = end_dur_ph,
+                      event = Terminations,
+                      type = "counting"
+                      )
+
+# 2.0.13 - remove association
+detach(ctr_data_trn_b)
+
+# 2.0.14 - calculate the K-M curves with the prior survival objects
+surv_fit_f <- survfit(surv_object_f ~ 1
+                      )
+
+surv_fit_b <- survfit(surv_object_b ~ Gender,
+                      data = ctr_data_trn_b
+                      )
+
+# 2.0.15 - plot the K-M survival curve, female only, then both males and females - are they reasonable?
+plot(surv_fit_f,
+        ylim=c(0,1),
+        xlab="Months",
+        ylab="Proportion not Terminated",
+        col=c("black", "red", "blue")
+     )
+legend('topright', c("Females", "Lower 95%CI", "Upper 95%CI"), col=c("black", "red", "blue"), lty=1:3, cex=0.8)
+
+plot(surv_fit_b,
+       ylim=c(0,1),
+       xlab="Months",
+       ylab="Proportion not Terminated",
+       col=c("red", "blue")
+     )
+legend('topright', c("Females", "Males"), col=c("red", "blue"), lty=1:3, cex=0.8)
+
+```
+
+`@sct`
+```{r}
+success_msg("Good work!")
+```
+
+
+
+***
+
+```yaml
+type: NormalExercise
+lang: r
+key: 
+xp: 100
+```
+
+
+`@instructions`
+
+- Now let us generate a simplified Nelson-Aalen test curve for each of the survival objects created in last exercise - Female only and Both males and females.
+
+- First select small chunks of the code by highlighting them. Then click on the "RUN CODE" button to run the Code by small sections. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as a R statement can span multiple lines.- First select sections of the code by highlight them. Then click on the "RUN CODE" button to run the Code in small chunks. Observe the results printed in the console and then proceed to next section of the code. Make sure you are selecting the complete R statement, as one R statement can span multiple lines.
+
+- Feel free to type R codes in the Console to test or perform other tasks.
+
+- Press the 'Submit Answers' button, after you have run the complete code and is ready to go to the next exercise.
+
+
+
+Note: Refer the code in "0200 - KM-NA.r"
+
+`@sample_code`
+```{r}
+# 2.0.16 - generate a simplified Nelson-Aalen test curve for each of the 2 objects - the ppt gives you an idea
+#           of what you should be looking for
+
+surv_na_f <- survfit(surv_object_f ~ 1,
+                     type = "fh"
+                     )
+
+surv_na_b <- survfit(surv_object_b ~ Gender,
+                      data = ctr_data_trn_b
+                     )
+
+# 2.0.17- retrieve the data for plotting the simplified Nelson-Aalen and related test results
+surv_na_f2 <- tidy(surv_na_f$time)
+surv_na_f2$surv <- tidy(surv_na_f$surv)
+surv_na_f2$nela <- -log(surv_na_f2$surv$x)
+surv_na_f2$haz <- log(surv_na_f2$nela)
+
+surv_na_b2 <- tidy(surv_na_b$time)
+surv_na_b2$surv <- tidy(surv_na_b$surv)
+surv_na_b2$nela <- -log(surv_na_b2$surv$x)
+surv_na_b2$haz <- log(surv_na_b2$nela)
+
+# 2.0.18 - plot the test results for females and both genders, simplified Nelson-Aalen and log(-log) plots
+#           are the CHFs linear?  are the log(-log) plots parallel?
+plot(surv_na_f2$x,
+     surv_na_f2$nela,
+     xlab="Months",
+     ylab="-log(survival curve)",
+     col=c("red"),
+     main = "Cumulative Hazard Function (CHF) for Females"
+     )
+legend('topright', c("Females"), col=c("red"), lty=1:3, cex=0.8)
+
+plot(surv_na_b2$x,
+     surv_na_b2$nela,
+     xlab="Months",
+     ylab="-log(survival curve)",
+     main = "Cumulative Hazard Function (CHF), Males and Females"
+     )
+
+plot(surv_na_f2$x,
+     surv_na_f2$haz,
+     xlab="Months",
+     ylab="log(-log(survival curve))",
+     col=c("red"),
+     main = "-log of CHF for Females"
+     )
+legend('topright', c("Females"), col=c("red"), lty=1:3, cex=0.8)
+
+plot(surv_na_b2$x,
+     surv_na_b2$haz,
+     xlab="Months",
+     ylab="log(-log(survival curve))",
+     main = "-log of CHF for Males and Females"
+     )
+
+```
+
+
+`@solution`
+```{r}
+# 2.0.16 - generate a simplified Nelson-Aalen test curve for each of the 2 objects - the ppt gives you an idea
+#           of what you should be looking for
+
+surv_na_f <- survfit(surv_object_f ~ 1,
+                     type = "fh"
+                     )
+
+surv_na_b <- survfit(surv_object_b ~ Gender,
+                      data = ctr_data_trn_b
+                     )
+
+# 2.0.17- retrieve the data for plotting the simplified Nelson-Aalen and related test results
+surv_na_f2 <- tidy(surv_na_f$time)
+surv_na_f2$surv <- tidy(surv_na_f$surv)
+surv_na_f2$nela <- -log(surv_na_f2$surv$x)
+surv_na_f2$haz <- log(surv_na_f2$nela)
+
+surv_na_b2 <- tidy(surv_na_b$time)
+surv_na_b2$surv <- tidy(surv_na_b$surv)
+surv_na_b2$nela <- -log(surv_na_b2$surv$x)
+surv_na_b2$haz <- log(surv_na_b2$nela)
+
+# 2.0.18 - plot the test results for females and both genders, simplified Nelson-Aalen and log(-log) plots
+#           are the CHFs linear?  are the log(-log) plots parallel?
+plot(surv_na_f2$x,
+     surv_na_f2$nela,
+     xlab="Months",
+     ylab="-log(survival curve)",
+     col=c("red"),
+     main = "Cumulative Hazard Function (CHF) for Females"
+     )
+legend('topright', c("Females"), col=c("red"), lty=1:3, cex=0.8)
+
+plot(surv_na_b2$x,
+     surv_na_b2$nela,
+     xlab="Months",
+     ylab="-log(survival curve)",
+     main = "Cumulative Hazard Function (CHF), Males and Females"
+     )
+
+plot(surv_na_f2$x,
+     surv_na_f2$haz,
+     xlab="Months",
+     ylab="log(-log(survival curve))",
+     col=c("red"),
+     main = "-log of CHF for Females"
+     )
+legend('topright', c("Females"), col=c("red"), lty=1:3, cex=0.8)
+
+plot(surv_na_b2$x,
+     surv_na_b2$haz,
+     xlab="Months",
+     ylab="log(-log(survival curve))",
+     main = "-log of CHF for Males and Females"
+     )
+
+```
+
+`@sct`
+```{r}
+success_msg("Good work!")
+```
+
+
+
+
