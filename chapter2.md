@@ -123,41 +123,6 @@ tq_table / sum(tq_table)
 ```
 
 
-`@solution`
-```{r}
-##########################################################################################
-# Purpose: To understand how to execute the different ways
-#             of viewing data and data summaries in R
-##########################################################################################
-
-# 1.0.1 - load the packages
-library(dplyr)
-library(data.table)
-
-# 1.0.4 - import the data
-# Datacamp session has already imported the data into a table name ctr_data
-
-# 1.0.5 - view the data to see what we're working with
-names(ctr_data)
-str(ctr_data)
-glimpse(ctr_data)
-class(ctr_data)
-head(ctr_data, 10)
-
-# 1.0.6 - view basic data summaries to see if there are any problems with the data
-summary(ctr_data)
-table(ctr_data$Cov_Type_Bucket)
-table(ctr_data$GroupIndicator)
-table(ctr_data$Gender)
-table(ctr_data$Cov_Type_Bucket, ctr_data$GroupIndicator)
-table(ctr_data$Cov_Type_Bucket, ctr_data$GroupIndicator, ctr_data$Gender)
-table(ctr_data$Diagnosis_Category)
-
-# 1.0.7 - dig into one of the fields, the tax-qualified status; status of unknown is frequent
-tq_table <- table(ctr_data$TQ_Status)
-tq_table / sum(tq_table)
-
-```
 
 `@sct`
 ```{r}
