@@ -84,7 +84,7 @@ library(data.table)
 library(dplyr)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -308,7 +308,7 @@ Use `names(table_name)` function to see the names of columns in a data frame or 
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -390,7 +390,7 @@ Use names() or str() or summary() functions.
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -446,7 +446,7 @@ Use `detach(table_name)` function to remove the table from the R search path.
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -529,7 +529,7 @@ key: 13c07d42c4
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -632,7 +632,7 @@ Use "table[selection creiteria,]" to remove the pick only selected records from 
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -696,7 +696,7 @@ lang: r
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -1235,7 +1235,7 @@ Type the `?` in front of the function names like `?dunif()` in the R console to 
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
@@ -1298,7 +1298,7 @@ lang: r
 library(data.table)
 
 temp <- tempfile()
-download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6490/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
+download.file("http://s3.amazonaws.com/assets.datacamp.com/production/course_6320/datasets/ILTCI%20PM%20workshop%20CTR%20data.zip", temp)
 unzip(temp,"ILTCI PM workshop CTR data.csv",overwrite=TRUE)
 ctr_data  <-fread("ILTCI PM workshop CTR data.csv", sep=",", header=TRUE) 
 unlink(temp)
